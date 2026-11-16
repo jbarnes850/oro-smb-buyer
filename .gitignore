@@ -6,3 +6,6 @@ __pycache__/
 *.pyc
 .pytest_cache/
 .ruff_cache/
+docs/evidence/records_metrics.json
+docs/evidence/transcript_metrics.json
+docs/evidence/quote_candidates.jsonl

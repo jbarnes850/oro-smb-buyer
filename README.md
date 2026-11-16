@@ -297,6 +297,7 @@ data/leaderboard-runs-b5-b6.json  leaderboard scored runs on the validation and 
 engine-runtime/              pyproject for the engine interpreter
 src/smb_buyer/               harness, RL environment, algorithms, SFT packing, analysis
 scripts/                     command-line entry points (above), export_model.py and smoke_test.sh
+scripts/evidence/            transcript and record mining behind docs/evidence (set SMB_RUNS_DIR)
 tests/test_algorithms.py     offline tests of the MaxRL/RLOO advantage seam
 docs/training_report.md      training report; docs/figures/ and docs/story-config.json reproduce its figures
 ```

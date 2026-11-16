@@ -75,7 +75,7 @@ def main():
         if free < args.min_free_gib:
             stop("disk", {"free_gib": round(free, 2)})
         metrics = run / "metrics.jsonl"
-        rows = [json.loads(l) for l in metrics.read_text().splitlines()] if metrics.exists() else []
+        rows = [json.loads(line) for line in metrics.read_text().splitlines()] if metrics.exists() else []
         cost = max((r.get("cost/cumulative_usd", 0) for r in rows), default=0)
         if cost > args.max_usd:
             stop("cost", {"cumulative_usd": cost})
