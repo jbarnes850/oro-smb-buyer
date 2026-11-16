@@ -9,14 +9,17 @@ Learning from delayed consequences in SMB Bench. Training report, November 2026
 3. [Behavior](#behavior)
 4. [Learning signal](#learning-signal)
 5. [Attribution](#attribution)
-6. [Next steps](#next-steps)
-7. [Method](#method)
-8. [Limits](#limits)
-9. [Code and model](#code-and-model)
+6. [Learning process](#learning-process)
+7. [Next steps](#next-steps)
+8. [Method](#method)
+9. [Limits](#limits)
+10. [Code and model](#code-and-model)
 
 ## TL;DR
 
 **Research question.** What experience and learning signal make an agent better at noticing, attributing and acting on the delayed consequences of its own decisions, in businesses it has never seen?
+
+Acting on a delayed consequence is teachable, but useful learning must extend through the decisions that follow. Rules extracted from training businesses led the final agent to protect every account from the first morning in its validation and test quarters. Training on its own continuations from archived frontier states added a smaller, uncertain gain. The remaining failure was the cost of carrying out that protection. The agent repeatedly relied on emergency supply and continued buying from a deteriorating supplier. These results suggest that transferable experience must teach both which future losses to prevent and how to coordinate present decisions to prevent them economically.
 
 - SMB Bench asks whether an agent can notice a delayed consequence, trace it to its own decision and act before it compounds. Its report found that the strongest buyers, GPT-6 Astra and the scripted expert, win by acting before the consequence arrives, protecting every account from the first morning, and that understanding a problem, changing behavior and improving the business are separate achievements. We treated each as a skill to teach, first in context by evolving the system prompt, then in the weights with reinforcement learning from frontier states. The resulting open 27B policy carries all three to businesses it has never seen.
 - Qwen3.8-27B, post-trained in the original SMB Bench simulator, runs a wholesaler's produce buying desk for a 90-day quarter and finishes ahead of 50% of the 16 leaderboard models on a sealed business (56% on validation). That includes both open-weight models, Grok 4.7 and all three Muse models. The six leaders still beat it by more than two standard errors, and GPT-6 Astra leads by $6,500 a quarter.
@@ -89,6 +92,8 @@ In the supplier quarter it records the cheapest supplier's cancellations, then r
 
 These two habits cost $7,700 a quarter at the local market and $1,100 in freight against GPT-6 Astra, more than the whole $6,500 gap, which higher sales partly offset. The report's gap between noticing and acting has moved from stockouts to suppliers.
 
+Experience can teach an agent to make a delayed consequence matter in today’s decisions. But acting on that consequence creates further decisions that must work together. The agent can learn to protect something valuable while still failing to organize its behavior around protecting it profitably.
+
 ## Learning signal
 
 ![Reward over the full final RL run](figures/fig3_rl.png)
@@ -115,7 +120,17 @@ Against the same model and prompt without reinforcement learning, on the sealed 
 
 ### Data and backbone
 
-Fine-tuning Qwen3.6-35B on the 44 most profitable frontier transcripts ended 71% of its runs on a malformed tool call, and none beat the frontier. From identical frontier states, untrained Qwen3.8-27B earned $1,200 to $2,100 more per run than Qwen3.6-35B. The useful unit of experience was a frontier state to continue from, not a transcript to copy.
+Fine-tuning Qwen3.6-35B on the 44 most profitable frontier transcripts ended 71% of its runs on a malformed tool call, and none beat the frontier. From identical frontier states, untrained Qwen3.8-27B earned $1,200 to $2,100 more per run than Qwen3.6-35B. The useful unit of experience was a frontier state to continue from, not a transcript to copy. Experience becomes more useful when it preserves a consequential choice the learner can still make, together with a way to judge the future that choice produces.
+
+## Learning process
+
+We frame the broader learning process around three capabilities.
+
+1. Extract a useful relationship from experience. Determine which earlier decisions explain a later outcome and under what conditions the relationship holds.
+2. Make that relationship govern repeated decisions. Carry the lesson into another business and apply it when it matters.
+3. Coordinate the resulting behavior. Manage the surrounding choices so that following the lesson improves the complete outcome.
+
+The experiment provides evidence for the second capability with human supplied lessons. It provides a possible additional improvement from training on the agent’s own continuations. Its remaining failures help specify the third capability. Independent extraction remains an open question.
 
 ## Next steps
 
@@ -124,7 +139,7 @@ Fine-tuning Qwen3.6-35B on the 44 most profitable frontier transcripts ended 71%
 
 ## Method
 
-Our hypothesis is that agents can learn to act on delayed consequences from verified experience in a simulator where every consequence is recorded, and carry that to businesses they have not seen. A first attempt trained one skill, stockout-aware replenishment, as single ordering decisions scored against the benchmark's fixed buying rule. The decision reward kept rising while whole-quarter profit fell, and the gains stayed on the business they were trained on. This work trains the whole desk and grades the whole quarter.
+Our hypothesis is that agents learn useful long term behavior from experience that connects their choices to later outcomes and gives them practice managing the tradeoffs those outcomes reveal. Progress means extracting lessons that remain useful in new businesses, applying them before avoidable damage occurs, and revising them when conditions change. A first attempt trained one skill, stockout-aware replenishment, as single ordering decisions scored against the benchmark's fixed buying rule. The decision reward kept rising while whole-quarter profit fell, and the gains stayed on the business they were trained on. This work trains the whole desk and grades the whole quarter.
 
 We taught the skills in two stages. First in context, by evolving the system prompt until it carried them, the practices the SMB Bench report credits to its expert buyer, the two rules read off the training businesses, a worked estimate of demand hidden by stockouts, and rules that keep long runs from failing. Then in the weights, with reinforcement learning from frontier states. Fine-tuning on frontier transcripts was tested between the two stages and dropped because it broke tool calls.
 
