@@ -30,11 +30,15 @@ Learning from delayed consequences in SMB Bench. Training report, November 2026
 
 ![Result](figures/fig1_result.png)
 
+*Figure 1. Mean profit per quarter with one standard error, each quarter type weighted equally. Leaderboard rows are its own scored runs.*
+
 The sealed business is one of the leaderboard's six, played as a normal quarter, a customer quarter where shorted accounts order less, and a supplier quarter where the cheapest supplier also starts arriving late and short. It is a hard business. The fixed buying rule breaks even and only three leaderboard models make money. The trained policy loses $4,500 a quarter. Its margin over Grok, GLM, GPT-6 Luna, Muse Wonder and Claude Haiku is $2,300 to $3,300 a quarter, about two standard errors or more, and its lead over Muse Spark, Muse Ember and DeepSeek is within noise. Every policy earns less here than on validation (GPT-6 Astra makes $17,300 a quarter on one and $2,000 on the other), and the trained policy sits mid-board on both. The starting model, Qwen3.6-35B, lost $29,000 a quarter on validation.
 
 ## Behavior
 
 ![Behaviors](figures/fig2_behaviors.png)
+
+*Figure 2. Behavior on the sealed business. Records cover our policies and nine replayed frontier models. The changed-quarter panel includes all 16 leaderboard models.*
 
 Measured with one script on the sealed business for the trained policy and the nine frontier models we replayed. Quotes are the policy's own words.
 
@@ -89,11 +93,15 @@ These two habits cost $7,700 a quarter at the local market and $1,100 in freight
 
 ![Reward over the full final RL run](figures/fig3_rl.png)
 
+*Figure 3. Each update draws new states. Both reward designs share starting states for the first four updates, and later dollar-reward updates start earlier in the quarter. The held-out pairs reuse the same trained checkpoint.*
+
 Each training example replays an archived frontier quarter to an exact morning between day 60 and day 85, lets the policy finish the quarter, and compares its profit with what that frontier model earned from the same morning. The engine is deterministic, so every example carries its own fair bar, and the reward is one bit for beating it. On the same states a dollar reward drifted. Responses grew from 3,800 to 7,100 tokens and the share of runs reaching the end of the quarter fell from 100% to 50%. Under the win-or-lose reward, 94 to 100% of runs finished at every update, the share beating the frontier went from 38% to 50%, and the mean margin against the frontier rose from minus $1,100 to even. Each update draws new states, so the training curve is noisy and the held-out pairs carry the evidence. RL raised profit in all four, by $1,000 to $4,400 a quarter, including on the sealed business and under prompts it was not trained with.
 
 ## Attribution
 
 ![Levers and attribution](figures/fig4_levers.png)
+
+*Figure 4. Successive validation comparisons, each measured on top of the one before, and an accounting breakdown of the sealed-business gap to GPT-6 Astra.*
 
 The validation gain of $31,400 a quarter splits by source, each step measured on top of the one before. The move from Qwen3.6-35B to Qwen3.8-27B is worth $20,400, written practice from the SMB Bench report and run-safety rules $7,600, two rules read off the training businesses $2,200, and reinforcement learning $1,200 (and $1,500 on the sealed business).
 
@@ -120,7 +128,23 @@ Our hypothesis is that agents can learn to act on delayed consequences from veri
 
 We taught the skills in two stages. First in context, by evolving the system prompt until it carried them, the practices the SMB Bench report credits to its expert buyer, the two rules read off the training businesses, a worked estimate of demand hidden by stockouts, and rules that keep long runs from failing. Then in the weights, with reinforcement learning from frontier states. Fine-tuning on frontier transcripts was tested between the two stages and dropped because it broke tool calls.
 
-The policy is Qwen3.8-27B with a rank-32 LoRA adapter, trained on Tinker, Thinking Machines' hosted training service, in the original SMB Bench simulator and grader with the benchmark's tools, information and limits. Each morning it can query the business's records, read supplier quotes, place orders, set shortfall cover and edit its notes, which are all it carries to the next morning. We trained on four of the leaderboard's six businesses, used business 5 to choose between policies and to spot failures we then checked in the training businesses' records, and kept business 6 sealed until the final evaluation. Each of four updates used four start states with four runs each, a learning rate of 3e-5, the CISPO loss and MaxRL advantages, which divide each group's centered win-or-lose reward by the group's win rate. The final prompt keeps the benchmark's task, tools and scoring and adds the report's expert practices, run-safety rules and the two rules from the training businesses. Evaluation runs four quarters of each type with thinking on, temperature 1, top-p 0.95, top-k 20 and a reasoning cap of 57,344 tokens. The campaign used about $6,500 of compute at list price.
+The policy is Qwen3.8-27B with a rank-32 LoRA adapter, trained on Tinker, Thinking Machines' hosted training service, in the original SMB Bench simulator and grader with the benchmark's tools, information and limits. Each morning it can query the business's records, read supplier quotes, place orders, set shortfall cover and edit its notes, which are all it carries to the next morning. The grader measures the change in net business value over the completed quarter, so later purchases, lost customers and spoiled stock decide whether an earlier decision was useful.
+
+### Curriculum
+
+Start states are exact replays of archived frontier quarters on four of the leaderboard's six businesses, each played as three quarter types. An archive enters the state bank only when its transcript is available and its replay reproduces a graded profit. Replaying the preceding actions gives the policy the same inventory, outstanding orders and history the frontier model had that morning. Each update draws four states from days 60 to 85 and runs the policy four times from each. The draws are deterministic, so two reward designs see the same businesses, frontier histories and start days at the same update. Starting late keeps each trial short, and the curriculum is built to move earlier. [State draws](../scripts/rl.py) · [State bank](../src/smb_buyer/campaign.py)
+
+### Data
+
+The training data is the policy's own continuations from frontier states, not frontier transcripts, which broke tool calls when imitated (see Data and backbone above). Two rules read off the training businesses' records enter through the prompt, as the "Protect account customers" and "Buy enough, and only what sells" bullets of the [final prompt](../prompts/buyer_system.txt). Protect accounts from shortfalls, whose costs include smaller future orders, and buy enough to cover demand and commitments while limiting each lot to what sells before markdown.
+
+### Learning signal and optimizer
+
+Reward is one bit, 1 when the completed quarter earns more than the archived frontier model did from the same morning and 0 otherwise, including when the policy fails. Both start from the same history in a deterministic simulator, so every example carries its own reference outcome and the reward measures the decisions rather than the luck of the business. MaxRL advantages subtract the group's win rate from each reward and divide by that win rate, so a rare win gets more weight and a group that all wins or all loses gives no update. CISPO is the loss. It caps each token's importance weight, so tokens whose probability rose after sampling cannot dominate the update, while every token still contributes. Training used a learning rate of 3e-5 and four updates of 16 runs, about $600 of compute. The released model came out of 94 experiments, 62 training runs and 32 evaluation experiments. [Implementation](../src/smb_buyer/algorithms.py) · [Experiment accounting](evidence/campaign_scope.md)
+
+### Evaluation
+
+Business 5 is validation and business 6 is the sealed test. Each is played as a normal quarter, a customer quarter in which shorted accounts reduce future orders, and a supplier quarter in which the cheapest supplier also deteriorates. Our policies run four quarters of each type from day 0 with thinking on, temperature 1, top-p 0.95, top-k 20 and a reasoning cap of 57,344 tokens. Frontier rows are the 16 leaderboard models' own scored runs on these businesses, and replays of nine of them, which reproduce their profits to the cent, supply the behavior comparison. The [figure configuration](story-config.json) names the runs behind every figure. The campaign used about $6,500 of compute at list price.
 
 ## Limits
 
