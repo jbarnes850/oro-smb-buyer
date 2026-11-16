@@ -1,0 +1,37 @@
+[project]
+name = "oro-smb-buyer"
+version = "0.1.0"
+description = "Post-train Qwen3.8-27B on Tinker to run the full buying desk in the original ORO SMB Bench simulator"
+readme = "README.md"
+requires-python = ">=3.11,<3.14"
+dependencies = [
+  "tinker==0.39.1",
+  "tinker-cookbook",
+  "chz",
+  "numpy>=1.24",
+  "torch",
+]
+
+[project.optional-dependencies]
+plots = ["matplotlib>=3.8"]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[dependency-groups]
+dev = ["pytest>=8", "pytest-asyncio>=0.23"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+asyncio_mode = "auto"
+asyncio_default_fixture_loop_scope = "function"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/smb_buyer"]
+
+[tool.uv.sources]
+tinker-cookbook = { git = "https://github.com/thinking-machines-lab/tinker-cookbook", rev = "8486b8df2fc32e9713cf96dd5f75d43c7ef70a17" }
+
+[tool.ruff]
+line-length = 120

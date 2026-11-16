@@ -1,0 +1,134 @@
+{
+ "test_arms": {
+  "Qwen3.8-27B + RL (ours)": [
+   "test/maxrl-001-final-v6b"
+  ],
+  "Qwen3.8-27B, no RL (ours)": [
+   "test/q38-on-v6b"
+  ]
+ },
+ "test_rl_pair": [
+  "Qwen3.8-27B + RL (ours)",
+  "Qwen3.8-27B, no RL (ours)"
+ ],
+ "test_frontier_dir": "frontier-test-reference",
+ "val_frontier_dir": "frontier-val-reference",
+ "climb": [
+  [
+   "Qwen3.6-35B\nstarting prompt",
+   [
+    "warmstart/base-on"
+   ]
+  ],
+  [
+   "Qwen3.8-27B\nstarting prompt",
+   [
+    "val/ref-q38-on-v1",
+    "val/strict-q38-on-v1-trunc",
+    "val/resume-q38-on-v1"
+   ]
+  ],
+  [
+   "+ expert practices\nand run-safety\nrules",
+   [
+    "val/ref-q38-on-v5"
+   ]
+  ],
+  [
+   "+ cover every\naccount, size lots\nto shelf life",
+   [
+    "val/ref-q38-on-v6b"
+   ]
+  ],
+  [
+   "+ RL from\nfrontier late-\nquarter states",
+   [
+    "val/ref-maxrl-001-final-v6b"
+   ]
+  ]
+ ],
+ "rl_pairs": [
+  [
+   "validation, the prompt RL trained with",
+   [
+    "val/ref-maxrl-001-final"
+   ],
+   [
+    "val/ref-q38-on-v4",
+    "val/strict-q38-on-v4-trunc",
+    "val/resume-q38-on-v4"
+   ]
+  ],
+  [
+   "validation, final prompt (unseen in RL)",
+   [
+    "val/ref-maxrl-001-final-v6b"
+   ],
+   [
+    "val/ref-q38-on-v6b"
+   ]
+  ],
+  [
+   "validation, minimal prompt (unseen in RL)",
+   [
+    "val/ref-maxrl-001-final-v7b"
+   ],
+   [
+    "val/ref-q38-on-v7b"
+   ]
+  ]
+ ],
+ "panel": [
+  [
+   "Qwen3.6-35B\n+ SFT on frontier\ntranscripts",
+   "panel-d60/C2-sft-on-v1-trunc"
+  ],
+  [
+   "Qwen3.6-35B\nno SFT",
+   "panel-d60/D2-base36-on-v1-trunc"
+  ],
+  [
+   "Qwen3.8-27B\nno SFT",
+   "panel-d60/G-base38-on-v4-trunc"
+  ]
+ ],
+ "rl_runs": [
+  [
+   "win or lose vs the frontier",
+   "rl-q38-maxrl-001"
+  ],
+  [
+   "dollar return",
+   "rl-q38-cispo-001"
+  ]
+ ],
+ "test_pair_label": "sealed test, final prompt (unseen in RL)",
+ "leaderboard": "../data/leaderboard-runs-b5-b6.json",
+ "rl_run": "rl-q38-maxrl-001",
+ "attribution": [
+  [
+   "Qwen3.8-27B\nbackbone",
+   "model"
+  ],
+  [
+   "expert practices\n+ run safety",
+   "prompt"
+  ],
+  [
+   "two rules\nfrom training\nbusinesses",
+   "environment"
+  ],
+  [
+   "RL in the\nsimulator",
+   "training"
+  ]
+ ],
+ "val_arms": {
+  "Qwen3.8-27B + RL (ours)": [
+   "val/ref-maxrl-001-final-v6b"
+  ],
+  "Qwen3.8-27B, no RL (ours)": [
+   "val/ref-q38-on-v6b"
+  ]
+ }
+}

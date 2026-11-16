@@ -1,0 +1,1918 @@
+{
+ "returns_test": {
+  "primary (mean of world means)": {
+   "MaxRL final": -4495.333333333333,
+   "base v6": -5984.255833333333,
+   "Astra": 1969.4222222222222,
+   "top-4 frontier": -297.4613888888889,
+   "all 9 frontier": -3406.7566049382717
+  }
+ },
+ "returns_by_model_test": {
+  "maxrl_final": {
+   "null": -3556.9475,
+   "account_line": -1577.5625,
+   "supplier_deterioration": -8351.49,
+   "primary": -4495.333333333333,
+   "n": 12,
+   "worst": -12657.12,
+   "n_below_minus10k": 1
+  },
+  "base_v6": {
+   "null": -4748.045,
+   "account_line": -2640.94,
+   "supplier_deterioration": -10563.7825,
+   "primary": -5984.255833333333,
+   "n": 12,
+   "worst": -13913.49,
+   "n_below_minus10k": 3
+  },
+  "claude-fable-5-1": {
+   "null": 3446.003333333333,
+   "account_line": -782.2566666666667,
+   "supplier_deterioration": -3679.9166666666665,
+   "primary": -338.72333333333336,
+   "n": 9,
+   "worst": -7139.99,
+   "n_below_minus10k": 0
+  },
+  "claude-opus-5-5": {
+   "null": 3887.62,
+   "account_line": 223.51333333333332,
+   "supplier_deterioration": -9738.946666666667,
+   "primary": -1875.937777777778,
+   "n": 9,
+   "worst": -12234.08,
+   "n_below_minus10k": 2
+  },
+  "deepseek-v4.1-flash-1017": {
+   "null": 2137.096666666667,
+   "account_line": -6663.76,
+   "supplier_deterioration": -12594.619999999999,
+   "primary": -5707.094444444444,
+   "n": 9,
+   "worst": -13924.4,
+   "n_below_minus10k": 3
+  },
+  "gemini-4-argon": {
+   "null": -395.7633333333333,
+   "account_line": -1809.82,
+   "supplier_deterioration": -6734.6033333333335,
+   "primary": -2980.0622222222223,
+   "n": 9,
+   "worst": -12204.35,
+   "n_below_minus10k": 1
+  },
+  "glm-5.3": {
+   "null": -1035.59,
+   "account_line": -8330.146666666667,
+   "supplier_deterioration": -11639.435000000001,
+   "primary": -7001.72388888889,
+   "n": 8,
+   "worst": -12976.28,
+   "n_below_minus10k": 3
+  },
+  "gpt-6-astra": {
+   "null": 5217.51,
+   "account_line": 4509.553333333333,
+   "supplier_deterioration": -3818.7966666666666,
+   "primary": 1969.4222222222222,
+   "n": 9,
+   "worst": -6311.38,
+   "n_below_minus10k": 0
+  },
+  "gpt-6.1-sol": {
+   "null": 5258.883333333333,
+   "account_line": -2880.5066666666667,
+   "supplier_deterioration": -5212.196666666667,
+   "primary": -944.6066666666667,
+   "n": 9,
+   "worst": -8721.32,
+   "n_below_minus10k": 0
+  },
+  "grok-4.7": {
+   "null": 1876.0666666666666,
+   "account_line": -8853.413333333334,
+   "supplier_deterioration": -14061.233333333334,
+   "primary": -7012.860000000001,
+   "n": 9,
+   "worst": -14703.58,
+   "n_below_minus10k": 4
+  },
+  "muse-wonder-1.0": {
+   "null": 1772.0366666666666,
+   "account_line": -9407.09,
+   "supplier_deterioration": -12672.616666666667,
+   "primary": -6769.223333333333,
+   "n": 9,
+   "worst": -13154.64,
+   "n_below_minus10k": 4
+  }
+ },
+ "returns_val": {
+  "maxrl_final_val": {
+   "null": 4733.5475,
+   "account_line": 3969.7875000000004,
+   "supplier_deterioration": -1444.97,
+   "primary_failure_as_-25k": 2419.455,
+   "failures": [],
+   "n": 12
+  },
+  "base_v6_val": {
+   "null": 3847.185,
+   "account_line": 6238.8475,
+   "supplier_deterioration": -6436.9974999999995,
+   "primary_failure_as_-25k": 1216.345,
+   "failures": [
+    "supplier_deterioration:TOOL_CONTRACT_ERRORS@d75"
+   ],
+   "n": 12
+  },
+  "q36_base_v1_val": {
+   "null": -12784.13,
+   "account_line": -51262.87,
+   "supplier_deterioration": -22843.38,
+   "primary_failure_as_-25k": -28963.46,
+   "failures": [],
+   "n": 3
+  }
+ },
+ "q1": {
+  "days with reasoning about stockouts (frac)": {
+   "MaxRL final": 0.9694444444444444,
+   "base v6": 0.975925925925926,
+   "Astra": null,
+   "top-4 frontier": null,
+   "all 9 frontier": null
+  },
+  "days with explicit censoring/true-demand inference (frac)": {
+   "MaxRL final": 0.8555555555555555,
+   "base v6": 0.8472222222222222,
+   "Astra": null,
+   "top-4 frontier": null,
+   "all 9 frontier": null
+  },
+  "purchase rationales mentioning stockouts (frac)": {
+   "MaxRL final": 0.08136862443278106,
+   "base v6": 0.08261358863752728,
+   "Astra": 0.01218870480705383,
+   "top-4 frontier": 0.025256965664531842,
+   "all 9 frontier": 0.04126624604588773
+  },
+  "next-morning order / sku mean, after >=4h walk-in stockout": {
+   "MaxRL final": 1.1763263602272842,
+   "base v6": 1.106766877472603,
+   "Astra": 1.0602377049021185,
+   "top-4 frontier": 1.0478294439816394,
+   "all 9 frontier": 1.0451018380099426
+  },
+  "next-morning order / sku mean, after no stockout": {
+   "MaxRL final": 0.9442532618823689,
+   "base v6": 0.9720851965103045,
+   "Astra": 1.0044069341578423,
+   "top-4 frontier": 1.0117853752160975,
+   "all 9 frontier": 1.0101214128600318
+  },
+  "P(order next morning | stockout >=4h)": {
+   "MaxRL final": 0.8308792463866607,
+   "base v6": 0.7886281513220048,
+   "Astra": 0.8362877290715973,
+   "top-4 frontier": 0.7790249312013477,
+   "all 9 frontier": 0.7224544343491547
+  },
+  "P(order next morning | no stockout)": {
+   "MaxRL final": 0.6413037967829112,
+   "base v6": 0.6346777387953415,
+   "Astra": 0.7738567031003689,
+   "top-4 frontier": 0.7364768706831992,
+   "all 9 frontier": 0.6626227500954215
+  },
+  "walk-in fill (pos sold / latent walk-in demand)": {
+   "MaxRL final": 0.7407299049264069,
+   "base v6": 0.7008870629082596,
+   "Astra": 0.8033896500032516,
+   "top-4 frontier": 0.807114420951919,
+   "all 9 frontier": 0.7363613177522148
+  },
+  "sku-days with any walk-in stockout (frac)": {
+   "MaxRL final": 0.3266203703703704,
+   "base v6": 0.3603240740740741,
+   "Astra": 0.25277777777777777,
+   "top-4 frontier": 0.23537037037037037,
+   "all 9 frontier": 0.3250034293552812
+  },
+  "walk-in stockout hours / quarter": {
+   "MaxRL final": 7424.083333333333,
+   "base v6": 8370.166666666666,
+   "Astra": 5265.888888888889,
+   "top-4 frontier": 5001.638888888889,
+   "all 9 frontier": 7157.691358024691
+  },
+  "stockout-hour share, days 0-29": {
+   "MaxRL final": 0.21485243055555556,
+   "base v6": 0.22688368055555555,
+   "Astra": 0.14783564814814815,
+   "top-4 frontier": 0.14764467592592592,
+   "all 9 frontier": 0.23477494855967077
+  },
+  "stockout-hour share, days 60-89": {
+   "MaxRL final": 0.28672743055555555,
+   "base v6": 0.3111979166666667,
+   "Astra": 0.21888888888888888,
+   "top-4 frontier": 0.20667245370370368,
+   "all 9 frontier": 0.2702250514403292
+  }
+ },
+ "q1_val": {
+  "days with reasoning about stockouts (frac)": {
+   "MaxRL final (VAL)": 0.9953703703703703,
+   "base v6 (VAL)": 0.9876543209876544,
+   "Qwen3.6 base v1 (VAL, n=3)": 0.45185185185185184
+  },
+  "days with explicit censoring/true-demand inference (frac)": {
+   "MaxRL final (VAL)": 0.9518518518518518,
+   "base v6 (VAL)": 0.9123456790123456,
+   "Qwen3.6 base v1 (VAL, n=3)": 0.10740740740740741
+  },
+  "next-morning order ratio after stockout": {
+   "MaxRL final (VAL)": 1.155557130052192,
+   "base v6 (VAL)": 1.1506059479607436,
+   "Qwen3.6 base v1 (VAL, n=3)": 0.9607723755981662
+  },
+  "next-morning order ratio after no stockout": {
+   "MaxRL final (VAL)": 0.9254435154780777,
+   "base v6 (VAL)": 0.9225957957410131,
+   "Qwen3.6 base v1 (VAL, n=3)": 1.1085157728798734
+  },
+  "walk-in fill": {
+   "MaxRL final (VAL)": 0.7508181086862797,
+   "base v6 (VAL)": 0.7320560480917861,
+   "Qwen3.6 base v1 (VAL, n=3)": 0.4697926604208836
+  }
+ },
+ "q2_all": {
+  "first day any cover set": {
+   "MaxRL final": 0,
+   "base v6": 0,
+   "Astra": 0,
+   "top-4 frontier": 8.020833333333332,
+   "all 9 frontier": 11.512345679012347
+  },
+  "accounts with cover '*' set on day 0 (of 6)": {
+   "MaxRL final": 6,
+   "base v6": 5.5,
+   "Astra": 3.3333333333333335,
+   "top-4 frontier": 1.0,
+   "all 9 frontier": 0.8271604938271605
+  },
+  "cover-off rules over the quarter": {
+   "MaxRL final": 1,
+   "base v6": 5.833333333333333,
+   "Astra": 7.777777777777778,
+   "top-4 frontier": 5.361111111111111,
+   "all 9 frontier": 3.950617283950617
+  },
+  "per-product cover rules": {
+   "MaxRL final": 1,
+   "base v6": 14.0,
+   "Astra": 19.22222222222222,
+   "top-4 frontier": 13.583333333333332,
+   "all 9 frontier": 8.641975308641975
+  },
+  "account shortfall kg (ordered - delivered)": {
+   "MaxRL final": 57.98558333333333,
+   "base v6": 74.78108333333333,
+   "Astra": 308.166,
+   "top-4 frontier": 427.23805555555555,
+   "all 9 frontier": 639.5828456790123
+  },
+  "account tonnage ordered (t)": {
+   "MaxRL final": 14.7107035,
+   "base v6": 14.553181333333333,
+   "Astra": 13.456413111111111,
+   "top-4 frontier": 12.194697777777778,
+   "all 9 frontier": 10.710396808641976
+  },
+  "closing demand reserve ($)": {
+   "MaxRL final": 623.7641666666667,
+   "base v6": 785.18,
+   "Astra": 584.7922222222222,
+   "top-4 frontier": 1451.1863888888888,
+   "all 9 frontier": 2052.0625308641975
+  }
+ },
+ "q2_null": {
+  "first day any cover set": {
+   "MaxRL final": 0,
+   "base v6": 0,
+   "Astra": 0,
+   "top-4 frontier": 0.1111111111111111,
+   "all 9 frontier": 8.666666666666666
+  },
+  "accounts with cover '*' set on day 0 (of 6)": {
+   "MaxRL final": 6,
+   "base v6": 6,
+   "Astra": 2,
+   "top-4 frontier": 0.5,
+   "all 9 frontier": 0.8518518518518519
+  },
+  "cover-off rules over the quarter": {
+   "MaxRL final": 0,
+   "base v6": 6.5,
+   "Astra": 18.333333333333332,
+   "top-4 frontier": 8.083333333333332,
+   "all 9 frontier": 6.592592592592593
+  },
+  "per-product cover rules": {
+   "MaxRL final": 0,
+   "base v6": 18.75,
+   "Astra": 40,
+   "top-4 frontier": 20.0,
+   "all 9 frontier": 13.555555555555555
+  },
+  "account shortfall kg (ordered - delivered)": {
+   "MaxRL final": 0.676,
+   "base v6": 14.312,
+   "Astra": 701.4403333333333,
+   "top-4 frontier": 825.72525,
+   "all 9 frontier": 1279.1840370370371
+  },
+  "account tonnage ordered (t)": {
+   "MaxRL final": 14.946924,
+   "base v6": 14.946924,
+   "Astra": 14.946924,
+   "top-4 frontier": 14.946924,
+   "all 9 frontier": 14.946924
+  },
+  "closing demand reserve ($)": {
+   "MaxRL final": 0.0,
+   "base v6": 0.0,
+   "Astra": 0.0,
+   "top-4 frontier": 0.0,
+   "all 9 frontier": 0.0
+  }
+ },
+ "q2_account_line": {
+  "first day any cover set": {
+   "MaxRL final": 0,
+   "base v6": 0,
+   "Astra": 0,
+   "top-4 frontier": 17.166666666666668,
+   "all 9 frontier": 21.296296296296298
+  },
+  "accounts with cover '*' set on day 0 (of 6)": {
+   "MaxRL final": 6,
+   "base v6": 6,
+   "Astra": 6,
+   "top-4 frontier": 1.5,
+   "all 9 frontier": 1.074074074074074
+  },
+  "cover-off rules over the quarter": {
+   "MaxRL final": 0,
+   "base v6": 0.75,
+   "Astra": 0,
+   "top-4 frontier": 5.416666666666667,
+   "all 9 frontier": 3.2222222222222223
+  },
+  "per-product cover rules": {
+   "MaxRL final": 0,
+   "base v6": 1.25,
+   "Astra": 0,
+   "top-4 frontier": 12.416666666666668,
+   "all 9 frontier": 7.222222222222222
+  },
+  "account shortfall kg (ordered - delivered)": {
+   "MaxRL final": 1.66975,
+   "base v6": 0.0,
+   "Astra": 0.0,
+   "top-4 frontier": 198.74083333333334,
+   "all 9 frontier": 287.28118518518517
+  },
+  "account tonnage ordered (t)": {
+   "MaxRL final": 14.946701,
+   "base v6": 14.946924,
+   "Astra": 14.946924,
+   "top-4 frontier": 11.619639833333334,
+   "all 9 frontier": 9.443742074074073
+  },
+  "closing demand reserve ($)": {
+   "MaxRL final": 32.45,
+   "base v6": 0.0,
+   "Astra": 0.0,
+   "top-4 frontier": 1960.2883333333334,
+   "all 9 frontier": 2809.676296296296
+  }
+ },
+ "q2_supplier_deterioration": {
+  "first day any cover set": {
+   "MaxRL final": 0,
+   "base v6": 0,
+   "Astra": 0,
+   "top-4 frontier": 6.375,
+   "all 9 frontier": 4.8125
+  },
+  "accounts with cover '*' set on day 0 (of 6)": {
+   "MaxRL final": 6,
+   "base v6": 4.5,
+   "Astra": 2,
+   "top-4 frontier": 1,
+   "all 9 frontier": 0.5555555555555556
+  },
+  "cover-off rules over the quarter": {
+   "MaxRL final": 3,
+   "base v6": 10.25,
+   "Astra": 5,
+   "top-4 frontier": 2.583333333333333,
+   "all 9 frontier": 2.037037037037037
+  },
+  "per-product cover rules": {
+   "MaxRL final": 3,
+   "base v6": 22,
+   "Astra": 17.666666666666668,
+   "top-4 frontier": 8.333333333333334,
+   "all 9 frontier": 5.148148148148148
+  },
+  "account shortfall kg (ordered - delivered)": {
+   "MaxRL final": 171.611,
+   "base v6": 210.03125,
+   "Astra": 223.05766666666668,
+   "top-4 frontier": 257.24808333333334,
+   "all 9 frontier": 352.28331481481484
+  },
+  "account tonnage ordered (t)": {
+   "MaxRL final": 14.2384855,
+   "base v6": 13.765696,
+   "Astra": 10.475391333333333,
+   "top-4 frontier": 10.0175295,
+   "all 9 frontier": 7.740524351851852
+  },
+  "closing demand reserve ($)": {
+   "MaxRL final": 1838.8425,
+   "base v6": 2355.54,
+   "Astra": 1754.3766666666666,
+   "top-4 frontier": 2393.2708333333335,
+   "all 9 frontier": 3346.511296296296
+  }
+ },
+ "q3": {
+  "top-supplier share of ordered grams": {
+   "MaxRL final": 0.727509625264508,
+   "base v6": 0.7248598746789282,
+   "Astra": 0.8422843746375869,
+   "top-4 frontier": 0.8034040779457521,
+   "all 9 frontier": 0.8695818190349677
+  },
+  "suppliers used (>2% of grams)": {
+   "MaxRL final": 3.8333333333333335,
+   "base v6": 3.6666666666666665,
+   "Astra": 2.888888888888889,
+   "top-4 frontier": 2.6944444444444446,
+   "all 9 frontier": 2.314814814814815
+  },
+  "claims auto-filed per quarter (not an agent action)": {
+   "MaxRL final": 324.25,
+   "base v6": 307.1666666666667,
+   "Astra": 302.44444444444446,
+   "top-4 frontier": 300.94444444444446,
+   "all 9 frontier": 251.24074074074073
+  },
+  "claim recoveries ($)": {
+   "MaxRL final": 605.1,
+   "base v6": 568.6325,
+   "Astra": 576.2222222222222,
+   "top-4 frontier": 560.8983333333333,
+   "all 9 frontier": 473.40407407407406
+  }
+ },
+ "q3_supplier_deterioration": {
+  "discount-supplier share of ordered grams, days 0-20": {
+   "MaxRL final": 0.6675659849412038,
+   "base v6": 0.6563689593516573,
+   "Astra": 0.8546509158727434,
+   "top-4 frontier": 0.8260994764134161,
+   "all 9 frontier": 0.8835933665667239
+  },
+  "discount-supplier share of ordered grams, days 21-89": {
+   "MaxRL final": 0.7462249806853134,
+   "base v6": 0.7477696885299957,
+   "Astra": 0.82705567660023,
+   "top-4 frontier": 0.7646720268587922,
+   "all 9 frontier": 0.8679805697467353
+  },
+  "discount-supplier share of received grams, orders day 0-20": {
+   "MaxRL final": 0.6700561124307344,
+   "base v6": 0.6603717624800525,
+   "Astra": 0.8538153673948841,
+   "top-4 frontier": 0.8277970986753105,
+   "all 9 frontier": 0.8855051662702916
+  },
+  "discount-supplier share of received grams, orders day 21-89": {
+   "MaxRL final": 0.7214584016981611,
+   "base v6": 0.7250209772799223,
+   "Astra": 0.8105191367647423,
+   "top-4 frontier": 0.7459170090220587,
+   "all 9 frontier": 0.8563364208076983
+  },
+  "local share of stock": {
+   "MaxRL final": 0.08261500373206589,
+   "base v6": 0.1079214628048644,
+   "Astra": 0.03378254861506005,
+   "top-4 frontier": 0.02567516962767796,
+   "all 9 frontier": 0.023684108566233916
+  },
+  "return ($)": {
+   "MaxRL final": -8351.49,
+   "base v6": -10563.7825,
+   "Astra": -3818.7966666666666,
+   "top-4 frontier": -5612.464166666667,
+   "all 9 frontier": -8905.818333333333
+  }
+ },
+ "q3_null": {
+  "discount-supplier share of ordered grams, days 0-20": {
+   "MaxRL final": 0.7351650744208091,
+   "base v6": 0.7978440997160978,
+   "Astra": 0.8360527219311034,
+   "top-4 frontier": 0.8075557386330177,
+   "all 9 frontier": 0.8538373346499409
+  },
+  "discount-supplier share of ordered grams, days 21-89": {
+   "MaxRL final": 0.7384259376161882,
+   "base v6": 0.7622266988626846,
+   "Astra": 0.8645863438315085,
+   "top-4 frontier": 0.7878463354043865,
+   "all 9 frontier": 0.8395242943823141
+  },
+  "discount-supplier share of received grams, orders day 0-20": {
+   "MaxRL final": 0.7374047803080205,
+   "base v6": 0.8009577393935267,
+   "Astra": 0.8384893832574767,
+   "top-4 frontier": 0.8091170081221895,
+   "all 9 frontier": 0.8557101272017066
+  },
+  "discount-supplier share of received grams, orders day 21-89": {
+   "MaxRL final": 0.7400404976273545,
+   "base v6": 0.7655813253765026,
+   "Astra": 0.8675348669367468,
+   "top-4 frontier": 0.7910316259567552,
+   "all 9 frontier": 0.8415887611672347
+  },
+  "local share of stock": {
+   "MaxRL final": 0.0676898233184006,
+   "base v6": 0.07610056280386354,
+   "Astra": 0.01539511427609088,
+   "top-4 frontier": 0.006225795042252791,
+   "all 9 frontier": 0.01614067545338867
+  },
+  "return ($)": {
+   "MaxRL final": -3556.9475,
+   "base v6": -4748.045,
+   "Astra": 5217.51,
+   "top-4 frontier": 4452.504166666667,
+   "all 9 frontier": 2462.6514814814814
+  }
+ },
+ "q3_weekly_disc_share_supplier_det": {
+  "MaxRL final": [
+   0.675090595700299,
+   0.5937944204229655,
+   0.7665424194975308,
+   0.6865709308200922,
+   0.6844814422436477,
+   0.7782557688364753,
+   0.694882419935624,
+   0.7912386192779539,
+   0.7557412248212889,
+   0.7981525903702722,
+   0.7659593279674142,
+   0.8007461158687192,
+   0.8581007036629875
+  ],
+  "base v6": [
+   0.6660717271064229,
+   0.6392501943256821,
+   0.6689273753415226,
+   0.7071885205240905,
+   0.6654632552598342,
+   0.664669335373456,
+   0.7508412595039438,
+   0.8464652192517399,
+   0.7697732370529881,
+   0.80003682941823,
+   0.8153883221398204,
+   0.8183607730695409,
+   0.7481019000896786
+  ],
+  "Astra": [
+   0.8197314125278806,
+   0.8417784239310341,
+   0.89995536362308,
+   0.8743448621665616,
+   0.7765590338253887,
+   0.7456171719326135,
+   0.769583167476442,
+   0.9256613746128041,
+   0.8604801060997163,
+   0.8860257365214141,
+   0.8140767651078787,
+   0.816182782717178,
+   0.9462828591161399
+  ],
+  "top-4 frontier": [
+   0.8273512797070464,
+   0.8014585912082626,
+   0.8521037587803474,
+   0.8459907124661805,
+   0.7864951705635063,
+   0.7834873565677691,
+   0.7418518089284927,
+   0.8060561789141392,
+   0.7355487076981513,
+   0.7363111725079095,
+   0.7393809185811865,
+   0.7393586401791781,
+   0.8024128318507503
+  ],
+  "all 9 frontier": [
+   0.8741178605831359,
+   0.8598062053035403,
+   0.9214510884767103,
+   0.9116803417813373,
+   0.8710259058089483,
+   0.8780505938967954,
+   0.8551195652178952,
+   0.8834414974908639,
+   0.8539655208711167,
+   0.858851652263991,
+   0.8585332197080842,
+   0.8508850091708902,
+   0.9037258798654746
+  ]
+ },
+ "q4": {
+  "local share of stock (local / (local + supplier received))": {
+   "MaxRL final": 0.0675936157448285,
+   "base v6": 0.07901576599575418,
+   "Astra": 0.027133684276328937,
+   "top-4 frontier": 0.01365209195708649,
+   "all 9 frontier": 0.018108093342110537
+  },
+  "local share, days 0-29": {
+   "MaxRL final": 0.04744564112749714,
+   "base v6": 0.052658430277982934,
+   "Astra": 0.019934743395561862,
+   "top-4 frontier": 0.008767005244753876,
+   "all 9 frontier": 0.017501861957689525
+  },
+  "local share, days 30-59": {
+   "MaxRL final": 0.07241452218850096,
+   "base v6": 0.09310413537774646,
+   "Astra": 0.0319694147035538,
+   "top-4 frontier": 0.015002683432644649,
+   "all 9 frontier": 0.020311966901148577
+  },
+  "local share, days 60-89": {
+   "MaxRL final": 0.08505996598822978,
+   "base v6": 0.09526651792936389,
+   "Astra": 0.029954484984339756,
+   "top-4 frontier": 0.017592458926537356,
+   "all 9 frontier": 0.01610654032277135
+  },
+  "days with a local purchase (of 90)": {
+   "MaxRL final": 71.83333333333333,
+   "base v6": 72.75,
+   "Astra": 45.44444444444444,
+   "top-4 frontier": 20.02777777777778,
+   "all 9 frontier": 20.11111111111111
+  },
+  "products bought locally (of 20)": {
+   "MaxRL final": 18,
+   "base v6": 18,
+   "Astra": 14.11111111111111,
+   "top-4 frontier": 6.75,
+   "all 9 frontier": 5.91358024691358
+  },
+  "share of account grams filled from local": {
+   "MaxRL final": 0.10098201765646966,
+   "base v6": 0.11528935860851318,
+   "Astra": 0.0425339753243947,
+   "top-4 frontier": 0.021784454998449165,
+   "all 9 frontier": 0.027547805486323147
+  },
+  "local spend ($)": {
+   "MaxRL final": 11868.0625,
+   "base v6": 13476.063333333334,
+   "Astra": 4190.046666666667,
+   "top-4 frontier": 1818.913888888889,
+   "all 9 frontier": 2511.908024691358
+  },
+  "local price / cheapest same-day supplier quote": {
+   "MaxRL final": 2.5447672341778533,
+   "base v6": 2.5426636703238894,
+   "Astra": 2.5388475914755007,
+   "top-4 frontier": 2.5328388057343174,
+   "all 9 frontier": 2.5367732152576163
+  },
+  "premium over cheapest same-day quote ($)": {
+   "MaxRL final": 7203.908734784914,
+   "base v6": 8177.338516801844,
+   "Astra": 2540.563437631458,
+   "top-4 frontier": 1102.1483338316518,
+   "all 9 frontier": 1522.914533312445
+  },
+  "account revenue on locally covered grams ($)": {
+   "MaxRL final": 6915.971312157066,
+   "base v6": 7909.443972055055,
+   "Astra": 2499.507351354551,
+   "top-4 frontier": 1094.0726337369583,
+   "all 9 frontier": 1509.474447233997
+  },
+  "covered-line margin: that revenue - local cost ($)": {
+   "MaxRL final": -4952.091187842935,
+   "base v6": -5566.619361278277,
+   "Astra": -1690.539315312116,
+   "top-4 frontier": -724.8412551519306,
+   "all 9 frontier": -1002.433577457361
+  },
+  "local lines where cost > 1.05 x line revenue (frac)": {
+   "MaxRL final": 0.9571292374942267,
+   "base v6": 0.9541638474718163,
+   "Astra": 0.8432614969162558,
+   "top-4 frontier": 0.8331794244482961,
+   "all 9 frontier": 0.6746847053438453
+  },
+  "local grams: no agent truck due that sku-day": {
+   "MaxRL final": 0.36763309159891916,
+   "base v6": 0.3905858387329558,
+   "Astra": 0.2832215965515059,
+   "top-4 frontier": 0.20098560880575153,
+   "all 9 frontier": 0.23500518933400072
+  },
+  "local grams: a truck due was late/short/cancelled": {
+   "MaxRL final": 0.5159079569819538,
+   "base v6": 0.5048649441250519,
+   "Astra": 0.6411514601953834,
+   "top-4 frontier": 0.37673609869471947,
+   "all 9 frontier": 0.30043805819655717
+  },
+  "local grams: truck on time but too small": {
+   "MaxRL final": 0.11645895141912704,
+   "base v6": 0.10454921714199228,
+   "Astra": 0.07562694325311074,
+   "top-4 frontier": 0.033389403610640134,
+   "all 9 frontier": 0.04480366604968906
+  },
+  "days with reasoning weighing local cost/premium (frac)": {
+   "MaxRL final": 0.987037037037037,
+   "base v6": 0.987962962962963,
+   "Astra": null,
+   "top-4 frontier": null,
+   "all 9 frontier": null
+  }
+ },
+ "q4_null": {
+  "local share of stock": {
+   "MaxRL final": 0.0676898233184006,
+   "base v6": 0.07610056280386354,
+   "Astra": 0.01539511427609088,
+   "top-4 frontier": 0.006225795042252791,
+   "all 9 frontier": 0.01614067545338867
+  },
+  "local spend ($)": {
+   "MaxRL final": 11774.1325,
+   "base v6": 14046.067500000001,
+   "Astra": 2281.29,
+   "top-4 frontier": 807.6108333333333,
+   "all 9 frontier": 2371.2937037037036
+  },
+  "covered-line margin ($)": {
+   "MaxRL final": -4930.447238054347,
+   "base v6": -5905.109060818142,
+   "Astra": -825.9887567273232,
+   "top-4 frontier": -270.0535602689738,
+   "all 9 frontier": -912.0641095198333
+  },
+  "account shortfall kg": {
+   "MaxRL final": 0.676,
+   "base v6": 14.312,
+   "Astra": 701.4403333333333,
+   "top-4 frontier": 825.72525,
+   "all 9 frontier": 1279.1840370370371
+  },
+  "gross margin": {
+   "MaxRL final": 0.25164550262534935,
+   "base v6": 0.23735594183279188,
+   "Astra": 0.3284570842272951,
+   "top-4 frontier": 0.33207373935197726,
+   "all 9 frontier": 0.32457665574748457
+  },
+  "return ($)": {
+   "MaxRL final": -3556.9475,
+   "base v6": -4748.045,
+   "Astra": 5217.51,
+   "top-4 frontier": 4452.504166666667,
+   "all 9 frontier": 2462.6514814814814
+  }
+ },
+ "q5": {
+  "supplier tonnage received (t)": {
+   "MaxRL final": 20.638042416666664,
+   "base v6": 19.806137916666668,
+   "Astra": 20.39984122222222,
+   "top-4 frontier": 19.46640488888889,
+   "all 9 frontier": 16.87952562345679
+  },
+  "supplier tonnage ordered (t)": {
+   "MaxRL final": 22.242882083333335,
+   "base v6": 21.25214258333333,
+   "Astra": 21.857009555555557,
+   "top-4 frontier": 20.854915583333334,
+   "all 9 frontier": 18.097749709876542
+  },
+  "local tonnage (t)": {
+   "MaxRL final": 1.4686545833333333,
+   "base v6": 1.6389833333333332,
+   "Astra": 0.5944462222222222,
+   "top-4 frontier": 0.26365147222222224,
+   "all 9 frontier": 0.34357745679012347
+  },
+  "(supplier + local) / (latent walk-in + account orders)": {
+   "MaxRL final": 0.88772856371649,
+   "base v6": 0.8655369734481589,
+   "Astra": 0.8863164656621825,
+   "top-4 frontier": 0.8777772147315563,
+   "all 9 frontier": 0.8144843035970467
+  },
+  "(supplier + local) / sold": {
+   "MaxRL final": 0.9957058311101716,
+   "base v6": 0.9912860831220438,
+   "Astra": 0.9840092169341822,
+   "top-4 frontier": 0.9854876690123946,
+   "all 9 frontier": 0.9763680017233414
+  },
+  "share of offered supplier capacity bought": {
+   "MaxRL final": 0.30307117912064,
+   "base v6": 0.2895718229067534,
+   "Astra": 0.29781345930062164,
+   "top-4 frontier": 0.2841593923225549,
+   "all 9 frontier": 0.24659153087505523
+  },
+  "sku-days with >=90% of offered capacity bought": {
+   "MaxRL final": 0.070733740967204,
+   "base v6": 0.061469334815638314,
+   "Astra": 0.04168982768204558,
+   "top-4 frontier": 0.042446420851090114,
+   "all 9 frontier": 0.026712371070347723
+  },
+  "orders at the offer's max_cases (frac)": {
+   "MaxRL final": 0.9617550400077417,
+   "base v6": 0.9535252065261034,
+   "Astra": 0.9279208370623817,
+   "top-4 frontier": 0.9148614755241579,
+   "all 9 frontier": 0.8944744248735773
+  },
+  "mean on-hand / mean daily sales (days of cover)": {
+   "MaxRL final": 0.8947410691422774,
+   "base v6": 0.8789419622251532,
+   "Astra": 0.7565762437242237,
+   "top-4 frontier": 0.947871141999729,
+   "all 9 frontier": 0.8385627246555779
+  },
+  "promised lead time, grams-weighted (days)": {
+   "MaxRL final": 1.3189345478212744,
+   "base v6": 1.3250333232733904,
+   "Astra": 1.2207423977385266,
+   "top-4 frontier": 1.2410782566726133,
+   "all 9 frontier": 1.1541632362766783
+  },
+  "revenue ($)": {
+   "MaxRL final": 92770.18833333332,
+   "base v6": 90530.92166666668,
+   "Astra": 90543.01222222223,
+   "top-4 frontier": 84109.34972222222,
+   "all 9 frontier": 73434.80703703704
+  },
+  "gross margin (revenue - COGS)/revenue": {
+   "MaxRL final": 0.24936846287869824,
+   "base v6": 0.23622415870231941,
+   "Astra": 0.3137259133275357,
+   "top-4 frontier": 0.32419753901015885,
+   "all 9 frontier": 0.32463563629593034
+  },
+  "spoilage write-off ($)": {
+   "MaxRL final": 487.56916666666666,
+   "base v6": 486.9291666666667,
+   "Astra": 210.7577777777778,
+   "top-4 frontier": 443.4588888888889,
+   "all 9 frontier": 335.0677777777778
+  },
+  "expired + aged-cull grams / stock received": {
+   "MaxRL final": 0.006958214509459778,
+   "base v6": 0.0069368039173610205,
+   "Astra": 0.003186901503519652,
+   "top-4 frontier": 0.005869817055013488,
+   "all 9 frontier": 0.005767107591341228
+  },
+  "inspection-rejected tonnage (t)": {
+   "MaxRL final": 0.28868716666666666,
+   "base v6": 0.27622274999999996,
+   "Astra": 0.26949144444444445,
+   "top-4 frontier": 0.26254283333333334,
+   "all 9 frontier": 0.22289887037037037
+  }
+ },
+ "q6": {
+  "final notebook (notes.md) bytes": {
+   "MaxRL final": 6759,
+   "base v6": 9163.916666666666,
+   "Astra": 5364.555555555556,
+   "top-4 frontier": 7518.222222222223,
+   "all 9 frontier": 7528.907407407407
+  },
+  "notebook markdown headings": {
+   "MaxRL final": 8.5,
+   "base v6": 16.083333333333332,
+   "Astra": 4.0,
+   "top-4 frontier": 4.972222222222222,
+   "all 9 frontier": 6.703703703703703
+  },
+  "notebook tracks in-transit/promised POs (frac of quarters)": {
+   "MaxRL final": 1,
+   "base v6": 1,
+   "Astra": 0.7777777777777778,
+   "top-4 frontier": 0.9166666666666666,
+   "all 9 frontier": 0.9629629629629629
+  },
+  "notebook has check/verify rules (frac)": {
+   "MaxRL final": 0.8333333333333334,
+   "base v6": 0.6666666666666666,
+   "Astra": 0.2222222222222222,
+   "top-4 frontier": 0.16666666666666666,
+   "all 9 frontier": 0.29012345679012347
+  },
+  "notebook has demand estimates (frac)": {
+   "MaxRL final": 1,
+   "base v6": 1,
+   "Astra": 0.7777777777777778,
+   "top-4 frontier": 0.7777777777777778,
+   "all 9 frontier": 0.8395061728395061
+  },
+  "memory tool calls per day": {
+   "MaxRL final": 2.1666666666666665,
+   "base v6": 2.062962962962963,
+   "Astra": 8.339506172839506,
+   "top-4 frontier": 5.442901234567901,
+   "all 9 frontier": 4.089711934156378
+  },
+  "total memory used at close (bytes)": {
+   "MaxRL final": 11576.166666666666,
+   "base v6": 10959.083333333334,
+   "Astra": 29005.0,
+   "top-4 frontier": 23341.11111111111,
+   "all 9 frontier": 19372.1975308642
+  }
+ },
+ "q7_components": {
+  "revenue": {
+   "maxrl": 92770.18833333332,
+   "base": 90530.92166666668,
+   "astra": 90543.01222222223
+  },
+  "COGS (incl. local buys)": {
+   "maxrl": 69529.55166666667,
+   "base": 68956.61166666666,
+   "astra": 62265.543333333335
+  },
+  "fees: dispatch": {
+   "maxrl": 4346.666666666667,
+   "base": 4148.333333333333,
+   "astra": 3235.5555555555557
+  },
+  "fees: delivery": {
+   "maxrl": 2341.5625,
+   "base": 2251.8166666666666,
+   "astra": 2308.777777777778
+  },
+  "fees: receiving": {
+   "maxrl": 1400.8875,
+   "base": 1345.6675,
+   "astra": 1385.1333333333334
+  },
+  "fees: overhead": {
+   "maxrl": 17943.3,
+   "base": 17943.3,
+   "astra": 17943.3
+  },
+  "spoilage": {
+   "maxrl": 487.56916666666666,
+   "base": 486.9291666666667,
+   "astra": 210.7577777777778
+  },
+  "inspection write-down": {
+   "maxrl": 736.045,
+   "base": 703.4141666666667,
+   "astra": 695.2755555555556
+  },
+  "claim recoveries": {
+   "maxrl": 653.0699999999999,
+   "base": 616.6025,
+   "astra": 624.1922222222222
+  },
+  "refunds": {
+   "maxrl": 312.04249999999996,
+   "base": 300.6383333333333,
+   "astra": 360.6433333333333
+  },
+  "valuation adj. (incl. -reserve)": {
+   "maxrl": -670.5425,
+   "base": -833.2333333333332,
+   "astra": -627.3988888888889
+  },
+  "return": {
+   "maxrl": -4495.333333333333,
+   "base": -5984.255833333333,
+   "astra": 1969.4222222222222
+  },
+  "memo: local spend": {
+   "maxrl": 11868.0625,
+   "base": 13476.063333333334,
+   "astra": 4190.046666666667
+  },
+  "memo: local premium vs quote": {
+   "maxrl": 7203.908734784914,
+   "base": 8177.338516801844,
+   "astra": 2540.563437631458
+  },
+  "memo: demand reserve": {
+   "maxrl": 623.7641666666667,
+   "base": 785.18,
+   "astra": 584.7922222222222
+  }
+ },
+ "q7_behaviour": {
+  "model calls per day": {
+   "MaxRL final": 7.362037037037037,
+   "base v6": 7.227777777777778,
+   "MaxRL (VAL)": 8.1,
+   "base v6 (VAL)": 8.319444444444445,
+   "Astra": 25.619753086419752,
+   "all 9 frontier": 14.031207133058984
+  },
+  "output tokens per day (ours)": {
+   "MaxRL final": 30485.103703703702,
+   "base v6": 30609.722222222223,
+   "MaxRL (VAL)": 35413.691666666666,
+   "base v6 (VAL)": 31830.97901234568,
+   "Astra": 0.0,
+   "all 9 frontier": 0.0
+  },
+  "reasoning chars per call (ours)": {
+   "MaxRL final": 7650.018491882657,
+   "base v6": 7909.481732970815,
+   "MaxRL (VAL)": 7761.906088541221,
+   "base v6 (VAL)": 6717.633595839517,
+   "Astra": 0,
+   "all 9 frontier": 0
+  },
+  "think-cap hits per quarter": {
+   "MaxRL final": 0.08333333333333333,
+   "base v6": 0.16666666666666666,
+   "MaxRL (VAL)": 0,
+   "base v6 (VAL)": 0,
+   "Astra": 0,
+   "all 9 frontier": 0
+  },
+  "tool calls per day": {
+   "MaxRL final": 32.86388888888889,
+   "base v6": 31.964814814814815,
+   "MaxRL (VAL)": 41.86018518518519,
+   "base v6 (VAL)": 42.032407407407405,
+   "Astra": 51.98518518518519,
+   "all 9 frontier": 38.405692729766805
+  },
+  "accepted purchase orders per day": {
+   "MaxRL final": 18.993518518518517,
+   "base v6": 18.183333333333334,
+   "MaxRL (VAL)": 26.03333333333333,
+   "base v6 (VAL)": 25.852777777777778,
+   "Astra": 19.0,
+   "all 9 frontier": 15.767489711934157
+  },
+  "tool-call error rate": {
+   "MaxRL final": 0.030907554511746736,
+   "base v6": 0.03096163001950811,
+   "MaxRL (VAL)": 0.039915115290919796,
+   "base v6 (VAL)": 0.0448045708717479,
+   "Astra": 0.01838463439746904,
+   "all 9 frontier": 0.04545077766084052
+  },
+  "MALFORMED errors per quarter": {
+   "MaxRL final": 4.166666666666667,
+   "base v6": 3.4166666666666665,
+   "MaxRL (VAL)": 8.083333333333334,
+   "base v6 (VAL)": 6.083333333333333,
+   "Astra": 0,
+   "all 9 frontier": 2.382716049382716
+  },
+  "rejected purchase orders per quarter": {
+   "MaxRL final": 23.166666666666668,
+   "base v6": 19.166666666666668,
+   "MaxRL (VAL)": 33.083333333333336,
+   "base v6 (VAL)": 33.77777777777778,
+   "Astra": 0,
+   "all 9 frontier": 7.814814814814815
+  },
+  "max consecutive failed tool results, any reason": {
+   "MaxRL final": 7.333333333333333,
+   "base v6": 4.583333333333333,
+   "MaxRL (VAL)": 9.333333333333334,
+   "base v6 (VAL)": 11.555555555555555,
+   "Astra": 2.6666666666666665,
+   "all 9 frontier": 3.876543209876543
+  }
+ },
+ "q7_maxrl_minus_base_by_world": {
+  "null": {
+   "test": 1191.0974999999999,
+   "val": 886.3624999999997
+  },
+  "account_line": {
+   "test": 1063.3775,
+   "val": -2269.0599999999995
+  },
+  "supplier_deterioration": {
+   "test": 2212.2924999999996,
+   "val": 4992.027499999999
+  }
+ },
+ "q8": {
+  "engine-rejected actions per quarter (grade)": {
+   "MaxRL final": 19.5,
+   "base v6": 16.916666666666668,
+   "Astra": 0,
+   "top-4 frontier": 2.1666666666666665,
+   "all 9 frontier": 4.87037037037037
+  },
+  "ordered grams/day, days 80-89 vs days 10-79": {
+   "MaxRL final": 0.822527245901421,
+   "base v6": 0.7186774870816085,
+   "Astra": 0.7843016548452244,
+   "top-4 frontier": 0.7183726660486093,
+   "all 9 frontier": 0.7228264244175284
+  },
+  "ordered grams/day, days 85-89 vs days 10-79": {
+   "MaxRL final": 0.597557966520904,
+   "base v6": 0.43713079148640765,
+   "Astra": 0.5920424126475703,
+   "top-4 frontier": 0.5551144432502656,
+   "all 9 frontier": 0.5836948750290333
+  },
+  "closing on-hand / mean daily sales (days)": {
+   "MaxRL final": 1.1528741942108525,
+   "base v6": 0.8744303889030293,
+   "Astra": 0.6769159602481001,
+   "top-4 frontier": 0.8121618794087688,
+   "all 9 frontier": 0.8093104083771308
+  },
+  "closing inventory value ($)": {
+   "MaxRL final": 604.8225,
+   "base v6": 378.4916666666667,
+   "Astra": 426.8466666666667,
+   "top-4 frontier": 439.07444444444445,
+   "all 9 frontier": 355.7841975308642
+  },
+  "dock refusals (storage full) per quarter": {
+   "MaxRL final": 3.3333333333333335,
+   "base v6": 4.666666666666667,
+   "Astra": 0.1111111111111111,
+   "top-4 frontier": 0.1388888888888889,
+   "all 9 frontier": 0.2901234567901234
+  },
+  "refused-at-dock kg per quarter": {
+   "MaxRL final": 61.236,
+   "base v6": 81.98816666666666,
+   "Astra": 2.0159999999999996,
+   "top-4 frontier": 2.5199999999999996,
+   "all 9 frontier": 5.319999999999999
+  }
+ },
+ "q8_tool_error_codes_per_quarter": {
+  "maxrl_final": {
+   "query_records:SQL_REJECTED": 42.0,
+   "place_purchase_order:ABOVE_REMAINING_CAPACITY": 2.5833333333333335,
+   "memory_edit:EDIT_OLD_NOT_FOUND": 3.6666666666666665,
+   "place_purchase_order:UNKNOWN_OFFER": 12.916666666666666,
+   "memory_append:NOTES_LIMIT_EXCEEDED": 0.6666666666666666,
+   "list_offers:RESULT_TOO_LARGE": 10.416666666666666,
+   "memory_edit:MALFORMED": 0.5,
+   "memory_edit:NOTES_LIMIT_EXCEEDED": 2.5,
+   "place_purchase_order:MALFORMED": 3.4166666666666665,
+   "memory_write:CALL_TEXT_TOO_LARGE": 2.9166666666666665,
+   "list_offers:MALFORMED": 0.08333333333333333,
+   "list_offers:UNKNOWN_SUPPLIER": 1.1666666666666667,
+   "memory_edit:CALL_TEXT_TOO_LARGE": 0.3333333333333333,
+   "place_purchase_order:DUPLICATE_KEY_CONFLICT": 3.9166666666666665,
+   "memory_write:MEMORY_BUDGET_EXCEEDED": 0.6666666666666666,
+   "memory_append:MEMORY_BUDGET_EXCEEDED": 0.08333333333333333,
+   "place_purchase_order:INVALID_CASES": 0.08333333333333333,
+   "memory_append:MALFORMED": 0.16666666666666666,
+   "place_purchase_order:INSUFFICIENT_FUNDS": 0.16666666666666666,
+   "memory_write:TOO_MANY_FILES": 2.5833333333333335,
+   "memory_write:TOOL_BUDGET_EXHAUSTED": 0.08333333333333333,
+   "list_offers:UNKNOWN_SKU": 0.08333333333333333,
+   "memory_delete:ADVANCE_MUST_BE_SOLE_CALL": 0.08333333333333333,
+   "advance_day:ADVANCE_MUST_BE_SOLE_CALL": 0.08333333333333333,
+   "place_purchase_order:TOOL_BUDGET_EXHAUSTED": 0.08333333333333333
+  },
+  "base_v6": {
+   "query_records:SQL_REJECTED": 43.083333333333336,
+   "memory_write:CALL_TEXT_TOO_LARGE": 2.9166666666666665,
+   "list_offers:RESULT_TOO_LARGE": 10.166666666666666,
+   "place_purchase_order:ABOVE_REMAINING_CAPACITY": 2.8333333333333335,
+   "memory_append:NOTES_LIMIT_EXCEEDED": 2.5,
+   "memory_edit:NOTES_LIMIT_EXCEEDED": 2.5,
+   "memory_edit:EDIT_OLD_NOT_FOUND": 5.5,
+   "place_purchase_order:UNKNOWN_OFFER": 10.5,
+   "place_purchase_order:DUPLICATE_KEY_CONFLICT": 3.5,
+   "place_purchase_order:MALFORMED": 2.0,
+   "memory_edit:CALL_TEXT_TOO_LARGE": 0.3333333333333333,
+   "place_purchase_order:INVALID_CASES": 0.3333333333333333,
+   "memory_edit:MALFORMED": 1.25,
+   "list_offers:UNKNOWN_SUPPLIER": 0.25,
+   "memory_append:MALFORMED": 0.16666666666666666,
+   "memory_edit:MEMORY_BUDGET_EXCEEDED": 0.25,
+   "memory_edit:ADVANCE_MUST_BE_SOLE_CALL": 0.08333333333333333,
+   "advance_day:ADVANCE_MUST_BE_SOLE_CALL": 0.08333333333333333,
+   "memory_write:MEMORY_BUDGET_EXCEEDED": 0.75,
+   "memory_read:FILE_NOT_FOUND": 0.16666666666666666
+  },
+  "maxrl_final_val": {
+   "list_offers:RESULT_TOO_LARGE": 47.916666666666664,
+   "query_records:SQL_REJECTED": 49.333333333333336,
+   "place_purchase_order:MALFORMED": 7.0,
+   "memory_write:CALL_TEXT_TOO_LARGE": 4.583333333333333,
+   "list_offers:UNKNOWN_SUPPLIER": 9.666666666666666,
+   "place_purchase_order:UNKNOWN_OFFER": 13.5,
+   "place_purchase_order:DUPLICATE_KEY_CONFLICT": 5.75,
+   "list_offers:UNKNOWN_SKU": 0.6666666666666666,
+   "place_purchase_order:INVALID_CASES": 0.3333333333333333,
+   "place_purchase_order:ABOVE_REMAINING_CAPACITY": 1.8333333333333333,
+   "memory_edit:EDIT_OLD_NOT_FOUND": 2.25,
+   "memory_edit:NOTES_LIMIT_EXCEEDED": 0.9166666666666666,
+   "memory_append:NOTES_LIMIT_EXCEEDED": 0.5833333333333334,
+   "memory_append:MALFORMED": 0.08333333333333333,
+   "memory_edit:MALFORMED": 0.9166666666666666,
+   "place_purchase_order:STALE_OFFER_VERSION": 0.08333333333333333,
+   "memory_edit:CALL_TEXT_TOO_LARGE": 0.3333333333333333,
+   "place_purchase_order:OFFER_EXPIRED": 3.8333333333333335,
+   "query_records:MALFORMED": 0.08333333333333333,
+   "place_purchase_order:TOOL_BUDGET_EXHAUSTED": 0.75,
+   "memory_append:TOOL_BUDGET_EXHAUSTED": 0.08333333333333333,
+   "memory_write:TOOL_BUDGET_EXHAUSTED": 0.08333333333333333
+  },
+  "base_v6_val": {
+   "list_offers:RESULT_TOO_LARGE": 60.0,
+   "query_records:SQL_REJECTED": 54.0,
+   "place_purchase_order:UNKNOWN_OFFER": 10.333333333333334,
+   "memory_append:NOTES_LIMIT_EXCEEDED": 1.8333333333333333,
+   "memory_edit:NOTES_LIMIT_EXCEEDED": 2.0,
+   "memory_write:MEMORY_BUDGET_EXCEEDED": 0.6666666666666666,
+   "memory_edit:EDIT_OLD_NOT_FOUND": 3.75,
+   "place_purchase_order:MALFORMED": 6.25,
+   "place_purchase_order:OFFER_EXPIRED": 3.3333333333333335,
+   "place_purchase_order:DUPLICATE_KEY_CONFLICT": 11.666666666666666,
+   "memory_edit:MALFORMED": 0.6666666666666666,
+   "place_purchase_order:ABOVE_REMAINING_CAPACITY": 1.0833333333333333,
+   "memory_write:CALL_TEXT_TOO_LARGE": 1.4166666666666667,
+   "memory_edit:CALL_TEXT_TOO_LARGE": 0.25,
+   "list_offers:UNKNOWN_SUPPLIER": 9.166666666666666,
+   "place_purchase_order:INVALID_CASES": 0.5,
+   "memory_append:MALFORMED": 0.08333333333333333,
+   "memory_delete:ADVANCE_MUST_BE_SOLE_CALL": 0.5,
+   "advance_day:ADVANCE_MUST_BE_SOLE_CALL": 0.25,
+   "place_purchase_order:TOOL_BUDGET_EXHAUSTED": 0.6666666666666666,
+   "memory_append:TOOL_BUDGET_EXHAUSTED": 0.08333333333333333,
+   "list_offers:UNKNOWN_SKU": 0.08333333333333333,
+   "memory_edit:ADVANCE_MUST_BE_SOLE_CALL": 0.25,
+   "memory_write:TOOL_BUDGET_EXHAUSTED": 0.08333333333333333
+  }
+ },
+ "cover_quarter_counts": {
+  "maxrl_final": {
+   "n": 12,
+   "all6_star_day0": 12,
+   "never_set_cover": 0,
+   "switched_cover_off": 2
+  },
+  "base_v6": {
+   "n": 12,
+   "all6_star_day0": 11,
+   "never_set_cover": 0,
+   "switched_cover_off": 6
+  },
+  "maxrl_final_val": {
+   "n": 12,
+   "all6_star_day0": 12,
+   "never_set_cover": 0,
+   "switched_cover_off": 3
+  },
+  "base_v6_val": {
+   "n": 11,
+   "all6_star_day0": 10,
+   "never_set_cover": 0,
+   "switched_cover_off": 0
+  },
+  "gpt-6-astra": {
+   "n": 9,
+   "all6_star_day0": 5,
+   "never_set_cover": 0,
+   "switched_cover_off": 4
+  },
+  "top4": {
+   "n": 36,
+   "all6_star_day0": 6,
+   "never_set_cover": 12,
+   "switched_cover_off": 13
+  },
+  "all9": {
+   "n": 80,
+   "all6_star_day0": 8,
+   "never_set_cover": 31,
+   "switched_cover_off": 29
+  }
+ },
+ "components_by_world": {
+  "null": {
+   "return": {
+    "maxrl": -3556.9475,
+    "base": -4748.045,
+    "astra": 5217.51,
+    "top4": 4452.504166666667
+   },
+   "revenue": {
+    "maxrl": 93875.0425,
+    "base": 91381.9425,
+    "astra": 95380.07666666666,
+    "top4": 93730.84333333332
+   },
+   "COGS": {
+    "maxrl": 70179.5625,
+    "base": 69681.215,
+    "astra": 64114.47,
+    "top4": 62664.46083333333
+   },
+   "local spend": {
+    "maxrl": 11774.1325,
+    "base": 14046.067500000001,
+    "astra": 2281.29,
+    "top4": 807.6108333333333
+   },
+   "local premium vs quote": {
+    "maxrl": 7143.450590381457,
+    "base": 8523.021037930983,
+    "astra": 1381.7168818131431,
+    "top4": 488.59751771767026
+   },
+   "covered-line margin": {
+    "maxrl": -4930.447238054347,
+    "base": -5905.109060818142,
+    "astra": -825.9887567273232,
+    "top4": -270.0535602689738
+   },
+   "dispatch fees": {
+    "maxrl": 4440.0,
+    "base": 4060.0,
+    "astra": 3366.6666666666665,
+    "top4": 3615.0
+   },
+   "spoilage": {
+    "maxrl": 510.6175,
+    "base": 307.175,
+    "astra": 113.78333333333333,
+    "top4": 352.3941666666667
+   },
+   "valuation adj (incl -reserve)": {
+    "maxrl": -37.8725,
+    "base": -35.5925,
+    "astra": -38.266666666666666,
+    "top4": -44.9925
+   },
+   "supplier received t": {
+    "maxrl": 20.81472075,
+    "base": 19.88880525,
+    "astra": 21.631923,
+    "top4": 21.716896583333334
+   },
+   "walk-in sold t": {
+    "maxrl": 7.531398,
+    "base": 6.87138125,
+    "astra": 8.110692666666667,
+    "top4": 8.017186416666666
+   },
+   "account filled t": {
+    "maxrl": 14.946247999999999,
+    "base": 14.932612,
+    "astra": 14.245483666666667,
+    "top4": 14.12119875
+   },
+   "walk-in fill": {
+    "maxrl": 0.7394709022138477,
+    "base": 0.6746671059467069,
+    "astra": 0.7963489944097016,
+    "top4": 0.7871680759334594
+   },
+   "acct short kg": {
+    "maxrl": 0.676,
+    "base": 14.312,
+    "astra": 701.4403333333333,
+    "top4": 825.72525
+   },
+   "gross margin": {
+    "maxrl": 0.25164550262534935,
+    "base": 0.23735594183279188,
+    "astra": 0.3284570842272951,
+    "top4": 0.33207373935197726
+   }
+  },
+  "account_line": {
+   "return": {
+    "maxrl": -1577.5625,
+    "base": -2640.94,
+    "astra": 4509.553333333333,
+    "top4": 267.5758333333333
+   },
+   "revenue": {
+    "maxrl": 95252.30249999999,
+    "base": 95529.6775,
+    "astra": 100138.91666666667,
+    "top4": 84949.70583333334
+   },
+   "COGS": {
+    "maxrl": 69497.1675,
+    "base": 70357.36499999999,
+    "astra": 69420.34666666666,
+    "top4": 56944.685
+   },
+   "local spend": {
+    "maxrl": 9273.9375,
+    "base": 9947.9325,
+    "astra": 5344.51,
+    "top4": 1421.8375
+   },
+   "local premium vs quote": {
+    "maxrl": 5630.068654388686,
+    "base": 6030.999147373279,
+    "astra": 3239.561868781067,
+    "top4": 861.7369959211211
+   },
+   "covered-line margin": {
+    "maxrl": -3868.5066943627717,
+    "base": -4038.7949962099783,
+    "astra": -2245.0664180896606,
+    "top4": -586.6676792789563
+   },
+   "dispatch fees": {
+    "maxrl": 4490.0,
+    "base": 4490.0,
+    "astra": 3473.3333333333335,
+    "top4": 3285.0
+   },
+   "spoilage": {
+    "maxrl": 339.77,
+    "base": 719.2775,
+    "astra": 136.23666666666668,
+    "top4": 324.80833333333334
+   },
+   "valuation adj (incl -reserve)": {
+    "maxrl": -90.39,
+    "base": -63.052499999999995,
+    "astra": -43.303333333333335,
+    "top4": -2003.5908333333334
+   },
+   "supplier received t": {
+    "maxrl": 21.59525425,
+    "base": 21.79858,
+    "astra": 22.365549666666666,
+    "top4": 19.682305416666665
+   },
+   "walk-in sold t": {
+    "maxrl": 7.8116055,
+    "base": 7.99377375,
+    "astra": 8.512936333333334,
+    "top4": 8.758071666666666
+   },
+   "account filled t": {
+    "maxrl": 14.94503125,
+    "base": 14.946924,
+    "astra": 14.946924,
+    "top4": 11.420899
+   },
+   "walk-in fill": {
+    "maxrl": 0.7669830975369586,
+    "base": 0.7848693014239684,
+    "astra": 0.8358433203103919,
+    "top4": 0.8599119522037657
+   },
+   "acct short kg": {
+    "maxrl": 1.66975,
+    "base": 0.0,
+    "astra": 0.0,
+    "top4": 198.74083333333334
+   },
+   "gross margin": {
+    "maxrl": 0.2699542130443424,
+    "base": 0.2632894662709136,
+    "astra": 0.30662960128012623,
+    "top4": 0.3319229489312598
+   }
+  },
+  "supplier_deterioration": {
+   "return": {
+    "maxrl": -8351.49,
+    "base": -10563.7825,
+    "astra": -3818.7966666666666,
+    "top4": -5612.464166666667
+   },
+   "revenue": {
+    "maxrl": 89183.22,
+    "base": 84681.145,
+    "astra": 76110.04333333333,
+    "top4": 73647.5
+   },
+   "COGS": {
+    "maxrl": 68911.925,
+    "base": 66831.255,
+    "astra": 53261.81333333333,
+    "top4": 51192.3
+   },
+   "local spend": {
+    "maxrl": 14556.1175,
+    "base": 16434.19,
+    "astra": 4944.34,
+    "top4": 3227.2933333333335
+   },
+   "local premium vs quote": {
+    "maxrl": 8838.206959584599,
+    "base": 9977.99536510127,
+    "astra": 3000.411562300163,
+    "top4": 1956.110487856164
+   },
+   "covered-line margin": {
+    "maxrl": -6057.319631111686,
+    "base": -6755.954026806712,
+    "astra": -2000.5627711193642,
+    "top4": -1317.8025259078618
+   },
+   "dispatch fees": {
+    "maxrl": 4110.0,
+    "base": 3895.0,
+    "astra": 2866.6666666666665,
+    "top4": 3355.0
+   },
+   "spoilage": {
+    "maxrl": 612.3199999999999,
+    "base": 434.33500000000004,
+    "astra": 382.25333333333333,
+    "top4": 653.1741666666667
+   },
+   "valuation adj (incl -reserve)": {
+    "maxrl": -1883.365,
+    "base": -2401.055,
+    "astra": -1800.6266666666666,
+    "top4": -2446.1158333333333
+   },
+   "supplier received t": {
+    "maxrl": 19.504152249999997,
+    "base": 17.7310285,
+    "astra": 17.202051,
+    "top4": 17.000012666666667
+   },
+   "walk-in sold t": {
+    "maxrl": 7.28965875,
+    "base": 6.5501275,
+    "astra": 7.923572999999999,
+    "top4": 7.885752583333334
+   },
+   "account filled t": {
+    "maxrl": 14.0668745,
+    "base": 13.55566475,
+    "astra": 10.252333666666667,
+    "top4": 9.760281416666666
+   },
+   "walk-in fill": {
+    "maxrl": 0.7157357150284143,
+    "base": 0.6431247813541038,
+    "astra": 0.7779766352896612,
+    "top4": 0.7742632347185316
+   },
+   "acct short kg": {
+    "maxrl": 171.611,
+    "base": 210.03125,
+    "astra": 223.05766666666668,
+    "top4": 257.24808333333334
+   },
+   "gross margin": {
+    "maxrl": 0.22650567296640295,
+    "base": 0.20802706800325274,
+    "astra": 0.3060910544751858,
+    "top4": 0.30859592874723957
+   }
+  }
+ },
+ "rl_vs_base": {
+  "test": {
+   "return_usd": {
+    "maxrl": -4495.333333333333,
+    "base": -5984.255833333333,
+    "diff": 1488.9224999999997,
+    "se": 1132.814296350453
+   },
+   "revenue_usd": {
+    "maxrl": 92770.18833333332,
+    "base": 90530.92166666668,
+    "diff": 2239.2666666666482,
+    "se": 1921.997063226164
+   },
+   "gross_margin": {
+    "maxrl": 0.24936846287869824,
+    "base": 0.23622415870231941,
+    "diff": 0.013144304176378824,
+    "se": 0.009338157430560708
+   },
+   "received_t": {
+    "maxrl": 20.638042416666664,
+    "base": 19.806137916666668,
+    "diff": 0.8319044999999967,
+    "se": 0.7012906762462787
+   },
+   "local_t": {
+    "maxrl": 1.4686545833333333,
+    "base": 1.6389833333333332,
+    "diff": -0.17032874999999992,
+    "se": 0.17102162565261572
+   },
+   "local_usd": {
+    "maxrl": 11868.0625,
+    "base": 13476.063333333334,
+    "diff": -1608.0008333333335,
+    "se": 1405.7495213144105
+   },
+   "walkin_fill": {
+    "maxrl": 0.7407299049264069,
+    "base": 0.7008870629082596,
+    "diff": 0.03984284201814725,
+    "se": 0.032355880446931856
+   },
+   "acct_short_kg": {
+    "maxrl": 57.98558333333333,
+    "base": 74.78108333333333,
+    "diff": -16.795499999999997,
+    "se": 41.356230635815656
+   },
+   "cover_rules_off": {
+    "maxrl": 1,
+    "base": 5.833333333333333,
+    "diff": -4.833333333333333,
+    "se": 3.2439402195706606
+   },
+   "cover_rules_per_sku": {
+    "maxrl": 1,
+    "base": 14.0,
+    "diff": -13.0,
+    "se": 7.704916660207347
+   },
+   "days_of_cover": {
+    "maxrl": 0.8947410691422774,
+    "base": 0.8789419622251532,
+    "diff": 0.01579910691712416,
+    "se": 0.07536201323999125
+   },
+   "spoilage_usd": {
+    "maxrl": 487.56916666666666,
+    "base": 486.9291666666667,
+    "diff": 0.6399999999999864,
+    "se": 129.3814344383104
+   },
+   "top_supplier_share": {
+    "maxrl": 0.727509625264508,
+    "base": 0.7248598746789282,
+    "diff": 0.002649750585579813,
+    "se": 0.025398491500948018
+   },
+   "tool_error_rate": {
+    "maxrl": 0.030907554511746736,
+    "base": 0.03096163001950811,
+    "diff": -5.407550776137526e-05,
+    "se": 0.002534297813916936
+   },
+   "malformed_errors": {
+    "maxrl": 4.166666666666667,
+    "base": 3.4166666666666665,
+    "diff": 0.7500000000000004,
+    "se": 1.0918468892796416
+   },
+   "max_consecutive_errors": {
+    "maxrl": 7.333333333333333,
+    "base": 4.583333333333333,
+    "diff": 2.75,
+    "se": 2.988016188165777
+   },
+   "output_tokens_per_day": {
+    "maxrl": 30485.103703703702,
+    "base": 30609.722222222223,
+    "diff": -124.61851851852043,
+    "se": 1344.778439030658
+   },
+   "calls_per_day": {
+    "maxrl": 7.362037037037037,
+    "base": 7.227777777777778,
+    "diff": 0.13425925925925952,
+    "se": 0.1777608981184074
+   },
+   "accepted_pos_per_day": {
+    "maxrl": 18.993518518518517,
+    "base": 18.183333333333334,
+    "diff": 0.8101851851851833,
+    "se": 0.7224372503575385
+   },
+   "close_days_of_cover": {
+    "maxrl": 1.1528741942108525,
+    "base": 0.8744303889030293,
+    "diff": 0.2784438053078232,
+    "se": 0.17578216301989041
+   },
+   "late_order_ratio_85_89": {
+    "maxrl": 0.597557966520904,
+    "base": 0.43713079148640765,
+    "diff": 0.16042717503449633,
+    "se": 0.07698540229142242
+   },
+   "dock_refusals": {
+    "maxrl": 3.3333333333333335,
+    "base": 4.666666666666667,
+    "diff": -1.3333333333333335,
+    "se": 1.3454312264791481
+   }
+  },
+  "val": {
+   "return_usd": {
+    "maxrl": 2419.455,
+    "base": 3278.900833333333,
+    "diff": -859.4458333333332,
+    "se": 1755.8010980796842
+   },
+   "revenue_usd": {
+    "maxrl": 289681.755,
+    "base": 287545.9847222222,
+    "diff": 2135.770277777803,
+    "se": 2831.099688338811
+   },
+   "gross_margin": {
+    "maxrl": 0.28008351786880653,
+    "base": 0.27930062204066003,
+    "diff": 0.0007828958281465015,
+    "se": 0.005430693072360602
+   },
+   "received_t": {
+    "maxrl": 56.479764833333334,
+    "base": 54.95287419444444,
+    "diff": 1.5268906388888936,
+    "se": 1.006625101388367
+   },
+   "local_t": {
+    "maxrl": 2.47817075,
+    "base": 2.6542475833333334,
+    "diff": -0.17607683333333357,
+    "se": 0.23180504935651403
+   },
+   "local_usd": {
+    "maxrl": 22534.880833333333,
+    "base": 24005.055833333336,
+    "diff": -1470.175000000003,
+    "se": 2518.1123762390985
+   },
+   "walkin_fill": {
+    "maxrl": 0.7508181086862797,
+    "base": 0.7320560480917861,
+    "diff": 0.01876206059449359,
+    "se": 0.01852696999235654
+   },
+   "acct_short_kg": {
+    "maxrl": 10.860333333333333,
+    "base": 6.085111111111111,
+    "diff": 4.775222222222222,
+    "se": 10.020843223064341
+   },
+   "cover_rules_off": {
+    "maxrl": 3.8333333333333335,
+    "base": 0,
+    "diff": 3.8333333333333335,
+    "se": 2.3629078131263044
+   },
+   "cover_rules_per_sku": {
+    "maxrl": 7.666666666666667,
+    "base": 0,
+    "diff": 7.666666666666667,
+    "se": 4.725815626252609
+   },
+   "days_of_cover": {
+    "maxrl": 0.9011551450826224,
+    "base": 0.7578214923326072,
+    "diff": 0.1433336527500152,
+    "se": 0.08039560904900375
+   },
+   "spoilage_usd": {
+    "maxrl": 5024.866666666667,
+    "base": 4378.859444444444,
+    "diff": 646.0072222222225,
+    "se": 968.0756079731702
+   },
+   "top_supplier_share": {
+    "maxrl": 0.5523630733950955,
+    "base": 0.5783456533714818,
+    "diff": -0.02598257997638631,
+    "se": 0.01921124947665493
+   },
+   "tool_error_rate": {
+    "maxrl": 0.039915115290919796,
+    "base": 0.0448045708717479,
+    "diff": -0.004889455580828102,
+    "se": 0.002544941327348049
+   },
+   "malformed_errors": {
+    "maxrl": 8.083333333333334,
+    "base": 6.083333333333333,
+    "diff": 2.000000000000001,
+    "se": 1.824473541519225
+   },
+   "max_consecutive_errors": {
+    "maxrl": 9.333333333333334,
+    "base": 11.555555555555555,
+    "diff": -2.2222222222222214,
+    "se": 2.3170729726303025
+   },
+   "output_tokens_per_day": {
+    "maxrl": 35413.691666666666,
+    "base": 31830.97901234568,
+    "diff": 3582.712654320985,
+    "se": 1003.1573951541908
+   },
+   "calls_per_day": {
+    "maxrl": 8.1,
+    "base": 8.319444444444445,
+    "diff": -0.219444444444445,
+    "se": 0.15892964023153255
+   },
+   "accepted_pos_per_day": {
+    "maxrl": 26.03333333333333,
+    "base": 25.852777777777778,
+    "diff": 0.18055555555555358,
+    "se": 0.42732091738884354
+   },
+   "close_days_of_cover": {
+    "maxrl": 1.212073685745873,
+    "base": 0.4702385983596256,
+    "diff": 0.7418350873862474,
+    "se": 0.2301659087421067
+   },
+   "late_order_ratio_85_89": {
+    "maxrl": 0.8406817460309151,
+    "base": 0.733444966079608,
+    "diff": 0.10723677995130709,
+    "se": 0.09343765662891838
+   },
+   "dock_refusals": {
+    "maxrl": 1.8333333333333333,
+    "base": 0.6388888888888888,
+    "diff": 1.1944444444444444,
+    "se": 1.1183790077331885
+   }
+  }
+ },
+ "_meta": {
+  "aggregation": "mean over worlds of per-world means over valid quarters; frontier groups average per-model values",
+  "top4": [
+   "gpt-6-astra",
+   "claude-fable-5-1",
+   "gpt-6.1-sol",
+   "claude-opus-5-5"
+  ],
+  "frontier_models": [
+   "claude-fable-5-1",
+   "claude-opus-5-5",
+   "deepseek-v4.1-flash-1017",
+   "gemini-4-argon",
+   "glm-5.3",
+   "gpt-6-astra",
+   "gpt-6.1-sol",
+   "grok-4.7",
+   "muse-wonder-1.0"
+  ],
+  "sources": [
+   "engine/grade.json",
+   "engine/public_records/*.csv",
+   "engine/model_transcript.jsonl(.gz)",
+   "engine/model_notebook.txt"
+  ]
+ }
+}

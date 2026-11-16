@@ -1,0 +1,21 @@
+# Separate interpreter for the ORO SMB Bench engine child (worker.py). It never gets
+# Tinker, the Cookbook or any credential. Create it with:  uv sync --project engine-runtime
+[project]
+name = "oro-smb-engine-runtime"
+version = "0.1.0"
+description = "Isolated runtime for the original engine worker; separate from Tinker training dependencies"
+requires-python = "==3.12.*"
+dependencies = [
+  "numpy==2.5.3",
+  "pandas==2.3.3",
+  "pyarrow==22.0.0",
+  "duckdb==1.4.1",
+]
+
+[tool.uv]
+package = false
+constraint-dependencies = [
+  "python-dateutil==4.0.0",
+  "pytz==2026.6",
+  "tzdata==2026.6",
+]
