@@ -1,98 +1,106 @@
-# Teaching an open 27B model to run a produce buying desk
+# Teaching an open model to run a business function
 
-SMB Bench training report, November 2026
+Learning from delayed consequences in SMB Bench
 
-The question behind this work is what experience and learning signal make an agent better at noticing, attributing and acting on the delayed consequences of its own decisions, in businesses it has never seen. SMB Bench tests this on a wholesaler's produce buying desk run for a 90-day quarter, where the cost of a decision often arrives weeks later and unlabelled.
+Running a business comes down to committing cash before demand is known and finding out weeks later whether the commitment was right. SMB Bench measures this on a wholesaler's produce buying desk run for a 90-day quarter, where sales hide the demand a stockout turned away and a shorted customer quietly orders less weeks later. We post-trained an open 27-billion-parameter model inside the original simulator and tested it on a business it never saw. It now sits in the middle of the frontier, and its transcripts show which parts of the frontier's failures a policy can fix and which still need learning.
 
-## Result
+Training report, November 2026
 
-Qwen3.8-27B, an open-weight model trained inside the original SMB Bench simulator, finishes ahead of 8 of the 16 models on the current leaderboard on a business it never saw during training or model selection. They include both open-weight models (DeepSeek V4.1 Flash and GLM 5.3), Grok 4.7, GPT-6 Luna, Claude Haiku 5.5 and all three Muse models. Its margin over Grok, GLM, GPT-6 Luna, Muse Wonder and Claude Haiku is $2,300 to $3,300 a quarter, about two standard errors or more. Its lead over Muse Spark, Muse Ember and DeepSeek is within noise, and the six models at the top lead it by more than two standard errors. On the validation business it is ahead of 9 of the 16. Every policy earns less on the sealed business than on validation (GPT-6 Astra makes $17,300 a quarter on one and $2,000 on the other), and ours sits in the middle of the board on both.
+## TL;DR
 
-The starting model, Qwen3.6-35B, lost $29,000 a quarter on validation. The final policy makes $2,400 there. Four reinforcement learning updates, about $600 of compute, added $1,500 a quarter on the sealed business, with a standard error of $1,100, and pointed the same way on validation.
+- **An open 27B model can learn a whole business function well enough to sit in the middle of the frontier.** On a sealed business, Qwen3.8-27B with our training finishes ahead of 50% of the 16 models on the current SMB Bench leaderboard, including both open-weight models (DeepSeek V4.1 Flash and GLM 5.3), Grok 4.7, GPT-6 Luna, Claude Haiku 5.5 and all three Muse models. On validation it is ahead of 56%, up from a $29,000 loss per quarter for the model we started from. The policy runs every product, supplier, order size, timing and cover decision for 90 days and carries what it learned to a business it has not seen. The skill is learnable at this scale from simulator experience, written practice and a few reinforcement learning updates.
+- **The frontier's named failures behave like policy failures, not knowledge failures.** The SMB Bench report found that frontier models under-buy, notice stockouts without acting, and short their customers. The trained policy buys the most produce of any policy we can measure, raises its next order after a stockout three times as much as GPT-6 Astra, and protects every customer account from the first morning in 100% of its quarters, against 10% of frontier quarters. It handles the delayed consequence by preventing it rather than detecting it, and gives up less profit than any leaderboard model when customers pull back or a supplier fails. A standing policy that is stated, carried and reinforced does what in-context adaptation rarely does.
+- **A win-or-lose signal against the frontier's own result is a usable learning signal, and the remaining gap is a timing problem.** Rewarding a run only for beating the frontier model's realized profit from the same morning stayed stable where a dollar reward drifted, and four updates (about $600 of compute) added $1,500 a quarter on the sealed business. What is left is a buffer and supplier habit whose value builds over the whole quarter. The policy describes the risk in its own notes and keeps the habit. We anticipate that reinforcement learning from earlier in the quarter, where those habits are set, should close much of the remaining $6,500 gap to GPT-6 Astra.
+
+## The question
+
+What experience and learning signal make an agent better at noticing, attributing and acting on the delayed consequences of its own decisions, in businesses it has never seen?
+
+Our hypothesis is that agents can learn this from verified experience in a simulator where every consequence is recorded. What should transfer is the relationship between evidence and action, which signal matters, what it implies for the next order, and when a standing commitment is worth its cost. A first attempt trained one skill, stockout-aware replenishment, as single ordering decisions scored against the benchmark's fixed buying rule. The decision reward kept rising while whole-quarter profit fell, and the gains stayed on the business they were trained on. Narrow decisions did not add up to a better buyer, so this work trains the whole desk and grades the whole quarter.
+
+## The trained policy sits in the middle of the frontier on an unseen business
+
+The sealed business is one of the leaderboard's six, played as a normal quarter, a customer quarter where shorted accounts order less, and a supplier quarter where the cheapest supplier also starts arriving late and short. The trained policy loses $4,500 a quarter there, a hard business where the benchmark's fixed buying rule breaks even and only three leaderboard models make money. Its margin over Grok, GLM, GPT-6 Luna, Muse Wonder and Claude Haiku is $2,300 to $3,300 a quarter, about two standard errors or more. Its lead over Muse Spark, Muse Ember and DeepSeek is within noise, and the six models at the top lead it by more than two standard errors. Every policy earns less here than on validation (GPT-6 Astra makes $17,300 a quarter on one and $2,000 on the other), and the trained policy sits in the middle of the board on both.
 
 ![Result](figures/fig1_result.png)
 
-## Findings from the final policy
+## It prevents the delayed consequence instead of detecting it
 
-The SMB Bench report found that frontier models under-buy, notice stockouts without acting on them, and short their restaurant and catering accounts. The final policy does the opposite on all three. We measured its test quarters and the nine frontier models we replayed on the same business with one script, and mined all 16,699 of its responses across 24 validation and test quarters. Quotes are the policy's own words, verbatim.
+A shorted restaurant or catering account keeps ordering, but less, and the loss shows up weeks later. The SMB Bench report describes learning from this as a three-step chain, seeing the orders fall, tying the fall to your own shortfalls and switching on shortfall cover, a standing instruction to fill any shortfall from the local market. Only 4% of leaderboard runs where accounts react completed that chain within three days.
 
-| SMB Bench report finding | Nine replayed frontier models, test business | Final policy |
-|---|---|---|
-| Every model under-buys | 12 to 22 tonnes a quarter, purchases cover 81% of true demand on average | 22.1 tonnes, covers 89% |
-| Models notice stockouts and barely act | next order after a four-hour stockout 6% above average for GPT-6 Astra | 18% above average |
-| Few protect their accounts in time | every account covered on day zero in 8 of 80 quarters | 24 of 24 quarters |
-| Changed quarters cost profit | all 16 leaderboard models lose $2,800 to $13,300 against their normal quarter | loses $1,400 |
-| The expert stocks for lead time plus a buffer | only Claude Fable 5.1 holds more than its lead time | holds 0.9 days against a 1.3-day lead time |
-| The expert consolidates on one supplier | 1.2 to 3.0 suppliers | 3.8 suppliers |
+The trained policy never lets the chain start. In 100% of its 24 validation and test quarters it switched on cover for every account on the first morning and kept 99.8% of account products covered to the end, against 56% of quarters for GPT-6 Astra and 10% for the frontier as a whole. Its notes name the delayed costs it is insuring against.
 
-**It infers the demand a stockout hides, then acts on it.** A sold-out shelf records lost sales as nothing. On 86 percent of test mornings the policy corrects for this before it orders.
-
-> "Let me estimate true demand from the sales data (d13, d14, with OOS correction)"
-
-After a four-hour stockout its next order is 18 percent above that product's average, three times GPT-6 Astra's 6 percent. After a week out of stock a quarter of the time or more, it adds 0.23 days of stock the next week, level with Astra and GLM 5.3 and behind only Claude Fable 5.1 on our measure. Its notes turn the estimate into a morning routine, and 83 percent of its final notebooks hold explicit checks, against 22 percent for Astra.
-
-> "2. New account lines due today/tomorrow -> size gaps vs on-hand + incoming."
-
-**It buys enough.** The report found every model bought 5 to 42 percent less than the fixed buying rule. The policy received 20.6 tonnes from suppliers and 1.5 tonnes from the local market per quarter, the most of the eleven policies we can measure on the test business, and its purchases covered 89 percent of true demand, the same as GPT-6 Astra. Its walk-in fill is still 74 percent against Astra's 80, a gap the thin buffer below explains.
-
-**It protects every account before the consequence appears.** Shorted accounts quietly order less weeks later. Of the 323 leaderboard runs in which this happens, the report found 12 that saw the fall, tied it to their own shortfalls and fixed it within three days. The policy never lets the chain start. In all 24 quarters it set shortfall cover, a standing instruction to fill any account shortfall from the local market, for every account on the first morning, and kept 99.8 percent of account products covered to the end. Its notes state the delayed consequence it is buying protection against, the 5 percent compensation, the accounts' smaller future orders and the end-of-quarter reserve, and weigh them against the local premium.
-
+> **Final policy, notes in a normal quarter**
 > "Keep ON; never toggle (comp + future order shrink + closing reserve >> local premium)."
 
-It still prices individual lines, and lets cover fill one when that loses less than buying would.
+> **Final policy, day 0 of a supplier quarter**
+> "Given cover is set for all accounts, even if potatoes fall short, cover would backstop (local potato price 97 vs account 77 → cover loses 20/lb, cheap!)."
 
-> "Skip gb (cover absorbs at 720, loss $24 vs buying loss ~$47)."
+The rule came from the training businesses and reached the policy as written instruction, and the policy applied it on two businesses it never saw. In the customer quarter its accounts kept ordering their full 15 tonnes, against 11.6 tonnes for the four strongest frontier models we replayed.
 
-GPT-6 Astra covered every account on day zero in 5 of 9 test quarters, and the nine replayed frontier models in 8 of 80. In the customer quarter the policy's accounts kept ordering their full 15 tonnes, against 11.6 tonnes for the four strongest replayed frontier models.
+## It reads the demand a stockout hides, and acts on it
 
-**It holds profit when customers or suppliers turn.** Against its own normal quarter it loses $1,400 on average across the customer and supplier quarters, the smallest loss of all 18 policies on the test business. GPT-6 Astra loses $4,900. Part of this is a low starting point, because always-on cover buys at the local market even when nothing goes wrong, and its normal quarter is weaker than every leaderboard model's. In absolute profit it is ahead of 11 of the 16 in the customer quarter and 9 of the 16 in the supplier quarter.
+A sold-out shelf records lost sales as nothing. On 86% of test mornings the policy corrects for this before it orders, and its notes turn the estimate into a routine.
 
-**Where it falls short, it notices and does not act.** The report's expert buyer stocks for the delivery lead time plus a buffer and consolidates orders on one supplier. The policy holds 0.9 days of stock against a 1.3-day lead time and splits orders over 3.8 suppliers, against 2.9 for Astra. So a late truck, or a day with none due, leaves an account order for cover to fill at the local market, at about 2.5 times the cheapest supplier quote. It buys there on 72 of 90 days and treats the cost as the price of loyalty.
+> **Final policy, day 15 of a customer quarter**
+> "Let me estimate true demand from the sales data (d13, d14, with OOS correction)"
 
+> **Final policy, notes in a supplier quarter**
+> "2. New account lines due today/tomorrow -> size gaps vs on-hand + incoming."
+
+After a four-hour stockout its next order is 18% above that product's average, against 6% for GPT-6 Astra. It received 22.1 tonnes a quarter, the most of the eleven policies we can measure on the sealed business, and its purchases covered 89% of true demand, the same as Astra and above the 81% frontier average. Where the report found frontier models noticing without acting, the policy acts.
+
+## It holds profit when customers or suppliers turn
+
+Against its own normal quarter, the policy loses $1,400 on average across the customer and supplier quarters, the smallest loss of all 18 policies on the sealed business. GPT-6 Astra loses $4,900. In absolute profit it is ahead of 69% of the leaderboard in the customer quarter and 56% in the supplier quarter. Part of the small loss is a low starting point. Always-on cover buys at the local market even when nothing goes wrong, so its normal quarter is weaker than any leaderboard model's. Insurance that costs money in a calm quarter pays when the world turns.
+
+## Its remaining gap is a habit it can describe but does not change
+
+The report's expert buyer stocks for the delivery lead time plus a buffer and consolidates orders on one supplier. The policy holds 0.9 days of stock against a 1.3-day lead time and splits orders over 3.8 suppliers, against 2.9 for GPT-6 Astra. So a late truck, or a day with none due, leaves an account order for cover to fill at the local market at about 2.5 times the cheapest supplier quote. It buys there on 80% of days and accepts the cost knowingly.
+
+> **Final policy, day 70 of a normal quarter**
 > "asp 1 is enough; let the cover handle asp line gaps (accept the premium, protect the account)."
 
-> "Local cover for these >> shelf -> expected ~$100-250/d cover losses; accept."
+In the supplier quarter it records the cheapest supplier's cancellations, then raises that supplier's share of its orders from 67% to 75% while the four strongest replayed frontier models cut theirs from 83% to 77%.
 
-In the supplier quarter it records the cheapest supplier's cancellations in its notes and keeps leaning on it, raising that supplier's share of its orders from 67 to 75 percent while the four strongest replayed frontier models cut theirs from 83 to 77 percent.
-
+> **Final policy, notes in a supplier quarter**
 > "sup_c d+1 NET21 (15-20% pre-cancel/case), sup_d d+2 NET7 reliable"
 
-These two habits cost it $7,700 a quarter at the local market and $1,100 in freight against GPT-6 Astra, more than its whole $6,500 gap to Astra, which its higher sales partly offset. The gap is widest in the normal quarter.
+> **Final policy, day 81 of the same quarter**
+> "Candidate sup_c (d82 arrival, cheap, but 1-day late risk + 15-20% cancellation)"
+
+These two habits cost $7,700 a quarter at the local market and $1,100 in freight against GPT-6 Astra, more than the whole $6,500 gap, which higher sales partly offset. This is the report's gap between noticing and acting, moved from stockouts to suppliers.
 
 ![Behaviors](figures/fig2_behaviors.png)
 
-## Method
+## A win-or-lose reward against the frontier is stable and transfers
 
-**Environment.** We used the original SMB Bench simulator and grader with the benchmark's tools, information and limits. Each morning the policy can query the business's records, read supplier quotes, place orders, set shortfall cover and edit its notes, which are all it carries to the next morning. Every business is played as a normal quarter, a customer quarter where shorted accounts order less, and a supplier quarter where the cheapest supplier also starts arriving late and short. We trained on four of the leaderboard's six businesses, chose between policies on business 5, and kept business 6 sealed until the final evaluation.
-
-**Task.** The policy runs the whole desk, every product, supplier, order size, timing and cover decision for 90 days, and is graded on the quarter's profit. An earlier attempt trained one skill, stockout-aware replenishment, as single decisions scored against the fixed buying rule. The decision reward kept rising while whole-quarter profit fell after the first 64 updates, and a model tuned on one business lost ground on the others. Narrow decisions did not add up to a better buyer.
-
-**Experience.** The useful unit of experience was a frontier state, not a frontier transcript. Fine-tuning Qwen3.6-35B on the 44 most profitable frontier transcripts from the training businesses, 179 million tokens, broke its tool calls. Restarted from frontier states at day 60, 71 percent of its runs ended on a malformed tool call and none beat the frontier. Instead we replay an archived frontier quarter to an exact morning between day 60 and 85, let the policy finish the quarter, and compare its profit with what that frontier model earned from the same morning. Because the engine is deterministic, every example carries its own fair bar.
-
-**Learning signal.** The reward is a single bit, 1 when the run beats the frontier model's result from the same morning. On the same states a reward in dollars drifted. Its responses grew from 3,800 to 7,100 tokens and the runs that reached the end of the quarter fell from 16 to 8 of 16. Under the win-or-lose reward, 15 or 16 of 16 runs finished at every update, the share that beat the frontier went from 6 of 16 at the first update to 8 of 16 at the last, and the mean margin against the frontier rose from minus $1,100 to even. Each update draws new states, so the training curve is noisy and the held-out comparisons carry the evidence. RL raised profit in all four matched comparisons, by $1,000 to $4,400 a quarter, including on the sealed business and under prompts it was not trained with (combined one-sided p of about 0.06, a rough guide because three of the comparisons share the validation business).
+Each training example replays an archived frontier quarter to an exact morning between day 60 and day 85, lets the policy finish the quarter, and compares its profit with what that frontier model earned from the same morning. The engine is deterministic, so every example carries its own fair bar, and the reward is a single bit for beating it. On the same states, a reward in dollars drifted. Responses grew from 3,800 to 7,100 tokens and the share of runs that reached the end of the quarter fell from 100% to 50%. Under the win-or-lose reward 94 to 100% of runs finished at every update, the share beating the frontier went from 38% to 50%, and the mean margin against the frontier rose from minus $1,100 to even. Each update draws new states, so the training curve is noisy. The held-out comparisons carry the evidence, and RL raised profit in all four of them, by $1,000 to $4,400 a quarter, including on the sealed business and under prompts it was not trained with.
 
 ![Reward over the full final RL run](figures/fig3_rl.png)
 
-**Optimizer and model.** The policy is Qwen3.8-27B with a rank-32 LoRA adapter, trained on Tinker, Thinking Machines' hosted training service. Each of the four updates used four start states with four runs each, a learning rate of 3e-5, the CISPO loss, and MaxRL advantages, which divide each group's centered win-or-lose reward by the group's win rate. Evaluation runs with thinking on, temperature 1, top-p 0.95, top-k 20 and a reasoning cap of 57,344 tokens. The backbone mattered most. From identical frontier states, Qwen3.8-27B earned $1,200 to $2,100 more per run than Qwen3.6-35B.
+## What came from the base model, the environment and the weights
 
-**System prompt.** The final prompt keeps the benchmark's task, tools and scoring and adds three kinds of guidance. It describes the practices the report attributes to its expert buyer, states run-safety rules (a cap on calls per response, the run-ending limits, a check on lot size), and adds two rules read off the training businesses' records. Keep cover on for every account from day zero, and size each order to what sells before markdown. Cover is not optional. Making it conditional, to cut the local-market spending, brought account shortfalls back from 8 kg to 456 kg and cost $5,700 a quarter on validation.
+The validation climb of $31,400 a quarter splits by source. Moving from Qwen3.6-35B to Qwen3.8-27B is worth $20,400. Written practice from the SMB Bench report and run-safety rules add $7,600. Two rules read off the training businesses' records add $2,200. Reinforcement learning in the simulator adds $1,200 on validation and $1,500 on the sealed business. Each step was measured on top of the one before.
 
-## What came from where
+**The environment holds rules that transfer.** The two rules we read off the training businesses, cover every account from day zero and size each order to what sells before markdown, produced the account protection and lot sizing that frontier models get wrong, on two businesses the policy never saw. They reached the policy as written instructions. The signal is in the environment, and whether an agent can extract it unaided is the open part of the question.
 
-Figure 4 splits the $31,400 validation climb by source. Moving from Qwen3.6-35B to Qwen3.8-27B is worth $20,400. The report's practices and the run-safety rules add $7,600. The two rules read off the training businesses add $2,200. Reinforcement learning in the simulator adds $1,200 on validation and $1,500 on the sealed business. Each step was measured on top of the one before, so the split depends on that order.
+**The weights learned to commit.** Against the same model and prompt without reinforcement learning, on the sealed business, the trained policy bought more from suppliers and $1,600 less at the local market, filled 74% of walk-in demand against 70%, almost never switched cover off, and covered every account on day zero in 100% of quarters against 83%. It reacted harder to stockout weeks on both businesses, and quarters lost by more than $10,000 fell from 25% to 8%. It did not change the buffer or the number of suppliers. Four late-quarter updates made the policy hold its plan. They did not teach it a habit whose payoff starts in the first weeks.
 
-**What the environment taught.** The simulator's training businesses hold rules that transfer. We read two of them off the records of archived frontier runs, wrote them into the prompt, and they produced the account protection and lot sizing that frontier models get wrong, on two businesses the policy never saw. The rules reached the policy as written instructions, so this shows the signal is in the environment. Whether an agent can extract it unaided is the open part of the question.
-
-**What training put in the weights.** Against the same model and prompt without reinforcement learning, on the sealed business, RL made the policy commit to its plan. It bought 0.8 tonnes more from suppliers and $1,600 less at the local market, filled 74 percent of walk-in demand against 70, ended the quarter with more stock on hand, almost never switched cover off, and covered every account on day zero in 12 of 12 quarters against 10 of 12. It reacted harder to stockout weeks on both businesses (combined one-sided p of about 0.07). It turned three disaster quarters below a $10,000 loss into one, and on validation its whole lead comes from one quarter the untrained model ended early after ten rejected orders in a row. It did not change tool errors, tokens, the stock buffer or the number of suppliers.
-
-**What this says about learnability.** The environment gives a usable learning signal. A win-or-lose reward, scored against archived frontier runs from the same morning, moved the weights in four updates, and the change held on a business the policy never saw and under prompts it was not trained with. The behaviors the policy carries across businesses reverse two of the report's named frontier failures and match the best frontier models on the third. Written instructions introduced them, and reinforcement learning made the policy hold them more consistently. Learning a delayed-consequence habit from the reward alone is not yet shown, because updates that start at day 60 cannot see consequences that build from the first weeks of a quarter. The remaining gap says where to look next. Claude Fable 5.1, the only replayed frontier model that stocks above its lead time, buys almost nothing at the local market. A numeric buffer rule drawn from training-business data, and reinforcement learning from days 10 to 59, when a quarter's buying pattern and stock levels are set, are the next tests.
+**Imitation broke the tools, and the backbone mattered most.** Fine-tuning Qwen3.6-35B on the 44 most profitable frontier transcripts ended 71% of its runs on a malformed tool call, and none beat the frontier. From identical frontier states, Qwen3.8-27B earned $1,200 to $2,100 more per run than Qwen3.6-35B without any training. The useful unit of experience was a frontier state to continue from, not a frontier transcript to copy.
 
 ![Levers and attribution](figures/fig4_levers.png)
 
+## What comes next
+
+The findings point to two experiments. A numeric buffer rule read off the training businesses should cut the local-market buying that makes up most of the gap to GPT-6 Astra, since Claude Fable 5.1, the only replayed frontier model that stocks above its lead time, buys almost nothing there. Reinforcement learning from days 10 to 59, when a quarter's buying pattern and stock levels are set, tests whether the reward alone can teach a delayed-consequence habit. Our broader hypothesis is that these judgments, when to insure, when to buffer, when to leave a supplier, can be learned from experience in one set of businesses and carried to the next.
+
+## Method
+
+The policy is Qwen3.8-27B with a rank-32 LoRA adapter, trained on Tinker, Thinking Machines' hosted training service, in the original SMB Bench simulator and grader with the benchmark's tools, information and limits. Each morning it can query the business's records, read supplier quotes, place orders, set shortfall cover and edit its notes, which are all it carries to the next morning. We trained on four of the leaderboard's six businesses, used business 5 to choose between policies and to spot failures we then checked in the training businesses' records, and kept business 6 sealed until the final evaluation. Each of four updates used four start states with four runs each, a learning rate of 3e-5, the CISPO loss and MaxRL advantages, which divide each group's centered win-or-lose reward by the group's win rate. The final prompt keeps the benchmark's task, tools and scoring and adds the report's expert practices, run-safety rules and the two rules from the training businesses. Evaluation runs four quarters of each type with thinking on, temperature 1, top-p 0.95, top-k 20 and a reasoning cap of 57,344 tokens. The campaign used about $6,500 of compute at list price.
+
 ## Limits
 
-Validation and test are one business each, and 12 test quarters per policy resolve about $2,300 between two policies. The leaderboard models ran the benchmark's own prompt and ours ran the prompt above, with the same tools, information, limits and grader. We did not rerun frontier models with our prompt, so part of our margin is instructions, $9,800 of the validation climb in Figure 4. We trained on four of the six leaderboard businesses and report no 18-task average. Frontier numbers are the leaderboard's own scored runs on businesses 5 and 6, and our replays of nine of those models reproduce them to the cent. Our pre-registered selection rule picked the untrained model on a validation near-tie. Both ran on the sealed business as a declared matched pair, and the untrained one is ahead of 5 of the 16. The RL updates ran under an earlier draft of the prompt, and every evaluation uses the final prompt. Qwen's reference parser accepted four tool calls in 3 of the 12 test quarters that our stricter training parser would have rejected, a run of ours that ends early scores a $25,000 loss where the leaderboard drops failed runs, and the reasoning cap fired once in the 12 test quarters.
+Validation and test are one business each, and 12 test quarters per policy resolve about $2,300 between two policies. The leaderboard models ran the benchmark's own prompt, and we did not rerun them with ours, so part of the margin is instructions, $9,800 of the validation climb. We trained on four of the six leaderboard businesses and report no 18-task average. Frontier numbers are the leaderboard's own scored runs, and our replays of nine of those models reproduce them to the cent. Our pre-registered selection rule picked the untrained model on a validation near-tie. Both ran on the sealed business as a declared matched pair, and the untrained one is ahead of 31% of the leaderboard. The RL updates ran under an earlier draft of the prompt, and every evaluation uses the final one. Qwen's reference parser accepted calls in 25% of test quarters that our stricter training parser would have rejected, a run of ours that ends early scores a $25,000 loss where the leaderboard drops failed runs, and the reasoning cap fired in 8% of test quarters.
 
-## Code and model
-
-This repository holds the harness, training and evaluation code, the final prompt (`prompts/buyer_system.txt`), the leaderboard snapshot and the figure scripts. `scripts/story_figures.py` regenerates every figure from the run records and `data/leaderboard-runs-b5-b6.json`, and `docs/evidence/` holds the transcript measures. The trained adapter is stored on Tinker. `scripts/export_model.py` exports it as a PEFT adapter and a merged Hugging Face model, and runs once a billing block on our Tinker account lifts.
+This repository holds the harness, training and evaluation code, the final prompt, the leaderboard snapshot, the figure scripts and the transcript evidence. The trained adapter is stored on Tinker, and `scripts/export_model.py` exports it as a PEFT adapter and a merged Hugging Face model once a billing block on our Tinker account lifts.

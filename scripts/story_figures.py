@@ -272,9 +272,9 @@ def fig_result(test, val, lb_test, rule_test, lb_val, rule_val, open_w, dump):
     v_rows = {**lb_val, RL_ARM: val[RL_ARM], BASE_ARM: val[BASE_ARM]}
     ahead_t = standings(ax1, t_rows, rule_test, open_w, "")
     ahead_v = standings(ax2, v_rows, rule_val, open_w, "")
-    ax1.set_title(f"Sealed test business. Ahead of {ahead_t} of {len(lb_test)} leaderboard models", loc="left",
+    ax1.set_title(f"Sealed test business. Ahead of {100 * ahead_t / len(lb_test):.0f}% of leaderboard models", loc="left",
                   fontsize=11, color=INK, fontweight="bold")
-    ax2.set_title(f"Validation business. Ahead of {ahead_v} of {len(lb_val)}", loc="left", fontsize=11, color=INK,
+    ax2.set_title(f"Validation business. Ahead of {100 * ahead_v / len(lb_val):.0f}%", loc="left", fontsize=11, color=INK,
                   fontweight="bold")
     dump["test_rank"] = {"ahead_of": ahead_t, "of": len(lb_test), "fixed_rule": rule_test["primary"]}
     dump["val_rank"] = {"ahead_of": ahead_v, "of": len(lb_val), "fixed_rule": rule_val["primary"]}
@@ -418,7 +418,7 @@ def fig_rl(test, dump):
                 ax.scatter(x, -3.4, s=34, color=BAD, marker="x", zorder=3)
         means.append(st.mean(t["margin_vs_frontier_kusd"] for t in tm if t.get("valid")))
         won = sum(t.get("beat_frontier", 0) for t in tm)
-        ax.text(k, 3.6, f"{won:.0f}/{len(tm)} beat", ha="center", fontsize=9,
+        ax.text(k, 3.6, f"{100 * won / len(tm):.0f}% beat", ha="center", fontsize=9,
                 color=GOOD, fontweight="bold")
         dump["rl_reward"][k] = {"beat": won, "rollouts": len(tm), "mean_margin_kusd": means[-1],
                                 "valid": sum(t.get("valid", 0) for t in tm)}
@@ -427,25 +427,26 @@ def fig_rl(test, dump):
     ax.text(-0.58, 0.1, "frontier's own result", fontsize=8, color=INK)
     ax.set_xlim(-0.6, 3.4)
     ax.set_ylim(-3.7, 4.2)
-    ax.set_xticks(range(len(means)), [f"update {k}" for k in range(len(means))])
+    ax.set_xticks(range(len(means)), [f"update {k}" for k in range(len(means))])  # 16 new runs per update
     style(ax, "Training reward over the full final run", "policy after k updates (16 new runs each)",
           "$K above the frontier model's result\nfrom the same morning (green = reward 1)")
 
     # (b) the same states under a dollar reward
     ax = axes[1]
     for (lab, run), color in zip(CFG["rl_runs"], (OURS, BASE)):
-        done = [sum(r["trajectory_metrics"].get("valid", 0) for r in rows) for rows in rollout_summaries(run)]
+        done = [100 * sum(r["trajectory_metrics"].get("valid", 0) for r in rows) / len(rows)
+                for rows in rollout_summaries(run)]
         ax.plot(range(len(done)), done, marker="o", color=color, lw=2, label=f"reward = {lab}")
         for x, v in zip(range(len(done)), done):
-            ax.annotate(f"{v:.0f}", (x, v), textcoords="offset points", xytext=(0, 7 if color == OURS else -14),
+            ax.annotate(f"{v:.0f}%", (x, v), textcoords="offset points", xytext=(0, 7 if color == OURS else -14),
                         ha="center", fontsize=8, color=color)
         dump["rl_completed"][lab] = done
     ax.axvspan(3.5, 5.5, color=GRID, alpha=0.6, zorder=0)
-    ax.text(4.5, 4.5, "longer stretches\n(days 35-59)", ha="center", fontsize=8, color=MUTED)
-    ax.set_ylim(0, 18)
+    ax.text(4.5, 28, "runs start earlier\n(days 35-59)", ha="center", fontsize=8, color=MUTED)
+    ax.set_ylim(0, 112)
     ax.set_xlim(-0.4, 5.5)
     ax.legend(frameon=False, fontsize=8, loc="lower left")
-    style(ax, "A win-or-lose reward stays stable", "update", "runs that reached the end of the quarter (of 16)")
+    style(ax, "A win-or-lose reward stays stable", "update", "runs that reached the end of the quarter (%)")
 
     # (c) held-out gains
     ax = axes[2]
